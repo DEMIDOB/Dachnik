@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block page_title %}
+    {{ title }}
+{% endblock page_title %}
+
+<a class="dropdown-item" href="#">Помидоры</a>
+
+{% block nav_seeds %}
+    {% for pr in seeds %}
+        <a class="dropdown-item" href="#">{{pr.title}}</a>
+    {% endfor %}
+{% endblock nav_seeds %}
+
+{% block content %}
+    <div class="container">
+        <h3>Товары</h3>
+        <div class="row">
+            {% for pr in products %}
+                <div class="col-md-4 text-center">
+                    <h4>
+                        {{pr.title}}
+                    </h4>
+                    <p>
+                        Цена: {{pr.price}}
+                    </p>
+                    <p>
+                        {{pr.description}}
+                    </p>
+            <hr>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

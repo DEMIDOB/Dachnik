@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block page_title %}
+    {{ title }}
+{% endblock page_title %}
+
+<a class="dropdown-item" href="#">Помидоры</a>
+
+{% block nav_seeds %}
+    {% for pr in seeds %}
+        <a class="dropdown-item" href="#">{{pr.title}}</a>
+    {% endfor %}
+{% endblock nav_seeds %}
+
+{% block content %}
+    Контент
+{% endblock content %}
