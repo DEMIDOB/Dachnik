@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <style>
+    /*HEADER*/
         header {
             color: white;
             background-image: linear-gradient(45deg, #5A6F5A 0%, #8CA894 50%);
@@ -48,6 +49,20 @@
             color: rgba(255, 255, 255, 0.8);
             transition: 0.5s;
         }
+
+
+        /*FOOTER*/
+        .myfooter {
+            background-image: linear-gradient(45deg, #5A6F5A 0%, #8CA894 50%);
+            margin-top: 27px;
+            color: white;
+        }
+
+        .myfooter a {
+            color: white;
+        }
+
+        /*CUSTOM STYLES*/
 
         {% block additional_styles %}
             styles
@@ -111,9 +126,101 @@
 
         </div>
     </header>
+
+
+
+
     {% block content %}
         this will be replaced by content
     {% endblock %}
+
+
+
+
+        <!-- Footer -->
+    <footer class="page-footer font-small myfooter pt-4">
+
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-md-6 mt-md-0 mt-3">
+
+            <!-- Content -->
+            <h5 class="text-uppercase">Магазин "Дачник"</h5>
+            <p>Суздальский пр., 13, Владимир, Владимирская обл., 600016</p>
+            <p>т. 44-51-62</p>
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none pb-3">
+
+        <!-- Grid column -->
+        <div class="col-md-3 mb-md-0 mb-3">
+
+            <!-- Links -->
+            <h5 class="text-uppercase">Навигация</h5>
+
+            <ul class="list-unstyled">
+            <li>
+                <a href="/">Главная</a>
+            </li>
+            <li>
+                <a href="/products/">Товары</a>
+            </li>
+            <li>
+                <a href="#!">Контакты</a>
+            </li>
+            <li>
+                <a href="#!">О семенах</a>
+            </li>
+            </ul>
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 mb-md-0 mb-3">
+
+            <!-- Links -->
+            <h5 class="text-uppercase">Links</h5>
+
+            <ul class="list-unstyled">
+            <li>
+                <a href="#!">Link 1</a>
+            </li>
+            <li>
+                <a href="#!">Link 2</a>
+            </li>
+            <li>
+                <a href="#!">Link 3</a>
+            </li>
+            <li>
+                <a href="#!">Link 4</a>
+            </li>
+            </ul>
+
+        </div>
+        <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="http://demidob.site/"> DEM!DOB & EMEL!ANOB</a>
+    </div>
+    <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
 
 </body>
 </html>
