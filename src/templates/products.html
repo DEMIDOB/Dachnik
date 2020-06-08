@@ -22,6 +22,7 @@
         padding-bottom:17px;
         text-align:center;
 
+        margin-top: 27px;
       }
       .productInfo{
         margin-top:21px;
@@ -42,7 +43,7 @@
 
       .productDescHover{
         font-size:20px;
-        transition: 1s;
+        transition: 0.5s;
       }
 
 
@@ -98,7 +99,7 @@
         
         @media(min-width: 1000px) {
             .productName {
-              font-size: min(2.5vw, 35px);
+              font-size: min(2.5vw, 30px);
             }
         }
 {% endblock additional_styles %}
@@ -113,15 +114,13 @@
 {% endblock nav_seeds %}
 
 {% block content %}
-    <div class="" style="background-color:none;">
-
-        {% for row in products %}
-        <div class="row productsRow">
-            {% for pr in row %}
+    <div class="container-md" style="background-color: none;">
+        <div class="row">
+        {% for pr in products %}
                 <div class="col-lg-4">
-                    <div class="productDiv">
+                    <div class="productDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
                         <img  src="{{pr.icon}}" class="productIcon" alt="">
-                        <div class="productInfo" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+                        <div class="productInfo">
                             <b class="productName">{{pr.title}}</b>
                             <p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
                         </div>
@@ -138,9 +137,8 @@
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
         {% endfor %}
+        </div>
     </div>
 
 

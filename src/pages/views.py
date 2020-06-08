@@ -37,7 +37,7 @@ def products_view(request, *args, **kwargs):
     }
 
     productRows, avProducts = getProductsRow()
-    myContext["products"] = productRows
+    myContext["products"] = avProducts
     print(productRows)
 
     for avpr in avProducts:
