@@ -8,31 +8,152 @@
     {{ title }}
 {% endblock page_title %}
 
-<a class="dropdown-item" href="#">Помидоры</a>
+{% block additional_styles %}
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+      .productDiv{
+        font-family: Arial;
+
+        width:100%;
+        /*height: 470px;
+        max-width: 330px;*/
+
+        border: 8px solid #708E6E;
+        padding:27px;
+        padding-bottom:17px;
+        text-align:center;
+
+      }
+      .productInfo{
+        margin-top:21px;
+        margin-bottom:21px;
+      }
+
+      .productDiv b, p, b{
+        margin:0;
+      }
+
+
+      .productDesc{
+        margin-top:8px;
+        color:#708E6E;
+        font-size:0;
+        transition: 1s;
+      }
+
+      .productDescHover{
+        font-size:20px;
+        transition: 1s;
+      }
+
+
+      .productName{
+        color:#526858;
+        font-style:bold;
+      }
+
+      .productIcon{
+        border: 5px solid #526858;
+        width:97%;
+        max-width: 350px;
+      }
+      .priceBuy {
+        display: flex;
+        justify-content: space-between;
+        margin-top:17px;
+        font-size:20px;
+
+      }
+      .productPrice{
+        color: #526858;
+        font-size:20px;
+      }
+      .discount{
+        color:#9F2C2C;
+      }
+      .productBuyButton{
+        color:#007bff;
+        text-decoration:none;
+
+      }
+      .productBuyButton:hover{
+        text-decoration:underline;
+
+      }
+        .productsRow {
+            margin-top: 27px;
+        }
+
+
+
+      
+
+        @media(max-width: 999px) {
+            .productDesc {
+                font-size: 20px;
+            }
+            .productName {
+              font-size: 35px;
+            }
+        }
+        
+        @media(min-width: 1000px) {
+            .productName {
+              font-size: min(2.5vw, 35px);
+            }
+        }
+{% endblock additional_styles %}
+
+
+
 
 {% block nav_seeds %}
     {% for pr in seeds %}
-        <a class="dropdown-item" href="#">{{pr.title}}</a>
+        <a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
     {% endfor %}
 {% endblock nav_seeds %}
 
 {% block content %}
-    <div class="container-fluid" style="">
-        <div class="row">
-            {% for pr in products %}
-                <div class="col-md-4 text-center">
-                    <h4>
-                        {{pr.title}}
-                    </h4>
-                    <p>
-                        Цена: {{pr.price}}
-                    </p>
-                    <p>
-                        {{pr.description}}
-                    </p>
-            <hr>
+    <div class="" style="background-color:none;">
+
+        {% for row in products %}
+        <div class="row productsRow">
+            {% for pr in row %}
+                <div class="col-lg-4">
+                    <div class="productDiv">
+                        <img  src="{{pr.icon}}" class="productIcon" alt="">
+                        <div class="productInfo" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+                            <b class="productName">{{pr.title}}</b>
+                            <p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
+                        </div>
+                        <hr>
+                        <div class="priceBuy">
+                            <b class="productPrice">{{pr.price}}
+                                <span class="discount">
+                                    {% if not pr.discount == 0 %}
+                                      (-{{pr.discount}}%)
+                                    {% endif %}
+                                </span>
+                            </b>
+                            <a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
         </div>
+        {% endfor %}
     </div>
+
+
+
+<script>
+    function mouseOver(divId) {
+        console.log(divId);
+        document.getElementById(divId).classList.add("productDescHover");
+    }
+
+    function mouseLeave(divId) {
+        console.log(divId);
+        document.getElementById(divId).classList.remove("productDescHover");
+    }
+</script>
 {% endblock content %}
