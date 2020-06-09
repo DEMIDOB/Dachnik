@@ -15,30 +15,18 @@
 {% endblock additional_styles %}
 
 
-{% load getByIndex %}
+
 
 {% block nav_seeds %}
-    {% for pr in products.семена %}
+    {% for pr in seeds %}
         <a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
     {% endfor %}
 {% endblock nav_seeds %}
 
 {% block content %}
-
     <div class="container-md" style="background-color: none;">
-
-    <div>
-        {% for cat in categories %}
-            <a href="#cat-{{cat}}">{{cat|capfirst}}</a>
-        {% endfor %}
-    </div>
-
-    {% for cat in categories %}
-        <div class="productsRow" id="cat-{{cat}}">
-        <span> {{cat|capfirst}} </span>
         <div class="row">
-        {% for pr in products|get_by_index:cat %}
-            
+        {% for pr in products %}
                 <div class="col-lg-4">
                     <div class="productDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
                         <img  src="{{pr.icon}}" class="productIcon" alt="">
@@ -59,18 +47,11 @@
                         </div>
                     </div>
                 </div>
-
-
         {% endfor %}
-        
         </div>
-        </div>
-
-    {% endfor %}
-
     </div>
+
 
 
 <script src={% static 'scripts/product_info.js' %}></script>
 {% endblock content %}
-

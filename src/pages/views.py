@@ -4,7 +4,7 @@ from products.models import Product
 
 from decimal import Decimal
 
-def getProductsRow():
+def getAvailableProducts():
     allProducts = Product.objects.all()
     avProducts = []
     for pr in allProducts:
@@ -12,6 +12,12 @@ def getProductsRow():
             newPrice = Decimal("{:.2f}".format(pr.price - pr.price*pr.discount/100))
             pr.price = newPrice
             avProducts.append(pr)
+
+    return avProducts
+
+
+def getProductsRow():
+    avProducts = getAvailableProducts()
 
     productRows = []
     stillMoreProducts = True
@@ -28,10 +34,42 @@ def getProductsRow():
                 break
     return productRows, avProducts
 
-# Create your views here.
+def getProductsCatrows():
+    avProducts = getAvailableProducts()
+    cats = []
+    prows = {}
+
+    for product in avProducts:
+        category = product.category.lower()
+        if not category in prows:
+            prows[category] = []
+            cats.append(category)
+        prows[category].append(product)
+
+    return prows, cats
+
+
+
+
 def products_view(request, *args, **kwargs):
+
+    productsRows, categories = getProductsCatrows()
+
     myContext = {
         "title": "Товары",
+        "categories": categories
+    }
+
+    myContext["products"] = productsRows
+
+    print(myContext)
+
+    return render(request, "products.html", myContext)
+
+# Create your views here.
+def allproducts_view(request, *args, **kwargs):
+    myContext = {
+        "title": "Все товары",
         "products": [],
         "seeds": []
     }
@@ -44,7 +82,11 @@ def products_view(request, *args, **kwargs):
         if avpr.category.lower() == "семена":
             myContext["seeds"].append(avpr)
 
-    return render(request, "products.html", myContext)
+    return render(request, "allproducts.html", myContext)
+
+
+
+
 
 def homepage_view(request, *agrs, **kwargs):
     myContext = {

@@ -1,0 +1,55 @@
+
+    /*HEADER*/
+    header {
+        color: white;
+        background-image: linear-gradient(45deg, #5A6F5A 0%, #8CA894 50%);
+    }
+
+    header h1 {
+        font-weight: bold;
+        font-size: 90px;
+    }
+
+    @media(max-width: 999px) {
+        body {
+            padding: 0;
+        }
+    }
+
+    @media(min-width: 1000px) {
+        body {
+            padding: 50px;
+        }
+    }
+
+    @media(min-width: 2000px) {
+        body {
+            padding-left: 20vw;
+            padding-right: 20vw;
+        }
+    }
+
+    #logo_a {
+        color: white;
+        text-decoration: none;
+        transition: 0.5s;
+    }
+
+    #logo_a:hover {
+        color: rgba(255, 255, 255, 0.8);
+        transition: 0.5s;
+    }
+
+
+    /*FOOTER*/
+    .myfooter {
+        background-image: linear-gradient(45deg, #5A6F5A 0%, #8CA894 50%);
+        margin-top: 27px;
+        color: white;
+    }
+
+    .myfooter a {
+        color: white;
+    }
+
+    /*CUSTOM STYLES*/
