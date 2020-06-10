@@ -2,71 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from products.models import Product
 
-from decimal import Decimal
-
-def getAvailableProducts():
-    allProducts = Product.objects.all()
-    avProducts = []
-    for pr in allProducts:
-        if pr.isAvailable:
-            newPrice = Decimal("{:.2f}".format(pr.price - pr.price*pr.discount/100))
-            pr.price = newPrice
-            avProducts.append(pr)
-
-    return avProducts
-
-
-def getProductsRow():
-    avProducts = getAvailableProducts()
-
-    productRows = []
-    stillMoreProducts = True
-    for i in range(0, len(avProducts), 3):
-        print(i)
-        if not stillMoreProducts:
-            break
-        productRows.append([])
-        for j in range(3):
-            try:
-                productRows[i//3].append(avProducts[i + j])
-            except IndexError:
-                stillMoreProducts = False
-                break
-    return productRows, avProducts
-
-def getProductsCatrows():
-    avProducts = getAvailableProducts()
-    cats = []
-    prows = {}
-
-    for product in avProducts:
-        category = product.category.lower()
-        if not category in prows:
-            prows[category] = []
-            cats.append(category)
-        prows[category].append(product)
-
-    return prows, cats
-
-
-
-
-def products_view(request, *args, **kwargs):
-
-    productsRows, categories = getProductsCatrows()
-
-    myContext = {
-        "title": "Товары",
-        "categories": categories
-    }
-
-    myContext["products"] = productsRows
-
-    print(myContext)
-
-    return render(request, "products.html", myContext)
+from products.gets import *
 
 # Create your views here.
+
+
 def allproducts_view(request, *args, **kwargs):
     myContext = {
         "title": "Все товары",
@@ -85,25 +25,35 @@ def allproducts_view(request, *args, **kwargs):
     return render(request, "allproducts.html", myContext)
 
 
-
-
-
 def homepage_view(request, *agrs, **kwargs):
+
+    productsRows, categories = getProductsCatrows()
+
     myContext = {
         "title": "Главная",
-        "products": [],
-        "seeds": []
+        "categories": categories
     }
 
-    productRows, avProducts = getProductsRow()
-    myContext["products"] = productRows
-    print(productRows)
-
-    for avpr in avProducts:
-        if avpr.category.lower() == "семена":
-            myContext["seeds"].append(avpr)
+    myContext["products"] = productsRows
 
     return render(request, "home.html", myContext)
+
+
+def products_view(request, *args, **kwargs):
+
+    productsRows, categories = getProductsCatrows()
+
+    myContext = {
+        "title": "Товары",
+        "categories": categories
+    }
+
+    myContext["products"] = productsRows
+
+    print(myContext)
+
+    return render(request, "products.html", myContext)
+
 
 def productpage_view(request, *args, **kwargs):
 
@@ -117,7 +67,5 @@ def productpage_view(request, *args, **kwargs):
         requestedObject = Product.objects.get(article=requestedArticle)
     except:
         return HttpResponse("Bad request!")
-
-
 
     return HttpResponse(str(requestedObject.title))

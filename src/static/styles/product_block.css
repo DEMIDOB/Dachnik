@@ -14,39 +14,41 @@
 
       margin-top: 27px;
     }
-    .productInfo{
+
+    .productInfo {
       margin-top:21px;
       margin-bottom:21px;
     }
 
-    .productDiv b, p, b{
+    .productDiv b, p, b {
       margin:0;
     }
 
 
-    .productDesc{
+    .productDesc {
       margin-top:8px;
       color:#708E6E;
       font-size:0;
       transition: 1s;
     }
 
-    .productDescHover{
+    .productDescHover {
       font-size:20px;
       transition: 0.5s;
     }
 
 
-    .productName{
+    .productName {
       color:#526858;
       font-style:bold;
     }
 
-    .productIcon{
+    .productIcon {
       border: 5px solid #526858;
       width:97%;
       max-width: 350px;
     }
+
     .priceBuy {
       display: flex;
       justify-content: space-between;
@@ -54,25 +56,27 @@
       font-size:20px;
 
     }
-    .productPrice{
+    .productPrice {
       color: #526858;
       font-size:20px;
     }
-    .discount{
+
+    .discount {
       color:#9F2C2C;
     }
-    .productBuyButton{
+
+    .productBuyButton {
       color:#007bff;
       text-decoration:none;
 
     }
+
     .productBuyButton:hover{
       text-decoration:underline;
-
     }
-      .productsRow {
-          margin-top: 27px;
-      }
+    .productsRow {
+      margin-top: 27px;
+    }
 
 
 
