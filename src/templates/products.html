@@ -25,17 +25,29 @@
 
 {% block content %}
 
-    <div class="container-md" style="background-color: none;">
+    
+
+    <div class="row">
+        <div class="col-md-6">
+            <span class="contentTitle"> Категории товаров:</span>
+         </div>
+        <div class="col-md-6 my-auto">
+                <div class="contentNavigation ">
+                    
+                    {% for cat in categories %}
+                        <a href="#cat-{{cat}}" class="navLink">{{cat|capfirst}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
 
     <div>
-        {% for cat in categories %}
-            <a href="#cat-{{cat}}">{{cat|capfirst}}</a>
-        {% endfor %}
     </div>
 
     {% for cat in categories %}
         <div class="productsRow" id="cat-{{cat}}">
-        <span> {{cat|capfirst}} </span>
+        <span class="contentSubtitle"> {{cat|capfirst}} </span>
         <div class="row">
         {% for pr in products|get_by_index:cat %}
             
@@ -62,13 +74,12 @@
 
 
         {% endfor %}
-        
         </div>
         </div>
 
     {% endfor %}
 
-    </div>
+
 
 
 <script src={% static 'scripts/product_info.js' %}></script>
