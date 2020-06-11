@@ -8,7 +8,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../../src/pages/static/styles/main.css">
+    <link rel="stylesheet" href="../../src/static/styles/main.css">
+    <link rel="stylesheet" href="../../src/static/styles/product_block.css">
     
 
     <title>
@@ -16,143 +17,95 @@
     </title>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <h1><a href="/" id="logo_a">Дачник</a></h1>
+
+
+
+
+    <div class="container" style="background-color: rgba(240, 240, 240);">
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              
+                <div class="productDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+                    <img  src="http://demidob.site/dch/imgs/none.jpg" class="productIcon" alt="">
+                    <div class="productInfo">
+                        <b class="productName">Огурец</b>
+                        <p class="productDesc" id="desc-{{pr.article}}"></p>
+                    </div>
+                    <hr>
+                    <div class="priceBuy">
+                        <b class="productPrice">100
+                            <span class="discount">
+                               
+                            </span>
+                        </b>
+                        <a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
+                    </div>
                 </div>
-                <div class="col-md-4 h2 my-auto text-md-right">
-                    Семена семян
-                </div>
+
             </div>
+            <div class="carousel-item">
 
-            <nav class="navbar navbar-expand-lg navbar-dark" style="padding-left: 0; margin-left: 0;">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Главная<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/products/">Товары</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Контакты</a>
-                        </li>
-                        <li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Семена
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">О семенах</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <p class="text-right">т. 44-51-62</p>
+                <div class="productDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+                    <img  src="http://demidob.site/dch/imgs/none.jpg" class="productIcon" alt="">
+                    <div class="productInfo">
+                        <b class="productName">Охуец</b>
+                        <p class="productDesc" id="desc-{{pr.article}}"></p>
+                    </div>
+                    <hr>
+                    <div class="priceBuy">
+                        <b class="productPrice">100
+                            <span class="discount">
+                               
+                            </span>
+                        </b>
+                        <a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
+                    </div>
                 </div>
-            </nav>
 
+            </div>
+            <div class="carousel-item">
+
+                <div class="productDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+                    <img  src="http://demidob.site/dch/imgs/none.jpg" class="productIcon" alt="">
+                    <div class="productInfo">
+                        <b class="productName">Ну норм чё</b>
+                        <p class="productDesc" id="desc-{{pr.article}}"></p>
+                    </div>
+                    <hr>
+                    <div class="priceBuy">
+                        <b class="productPrice">100
+                            <span class="discount">
+                               
+                            </span>
+                        </b>
+                        <a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
-    </header>
 
-
-
-
-    <div class="container">
-        XUI!
     </div>
 
 
 
-        <!-- Footer -->
-    <footer class="page-footer font-small myfooter pt-4">
 
-    <!-- Footer Links -->
-    <div class="container-fluid text-center text-md-left">
-
-        <!-- Grid row -->
-        <div class="row">
-
-        <!-- Grid column -->
-        <div class="col-md-6 mt-md-0 mt-3">
-
-            <!-- Content -->
-            <h5 class="text-uppercase">Магазин "Дачник"</h5>
-            <p>Суздальский пр., 13, Владимир, Владимирская обл., 600016</p>
-            <p>т. 44-51-62</p>
-
-        </div>
-        <!-- Grid column -->
-
-        <hr class="clearfix w-100 d-md-none pb-3">
-
-        <!-- Grid column -->
-        <div class="col-md-3 mb-md-0 mb-3">
-
-            <!-- Links -->
-            <h5 class="text-uppercase">Навигация</h5>
-
-            <ul class="list-unstyled">
-            <li>
-                <a href="/">Главная</a>
-            </li>
-            <li>
-                <a href="/products/">Товары</a>
-            </li>
-            <li>
-                <a href="#!">Контакты</a>
-            </li>
-            <li>
-                <a href="#!">О семенах</a>
-            </li>
-            </ul>
-
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-3 mb-md-0 mb-3">
-
-            <!-- Links -->
-            {% comment %} <h5 class="text-uppercase">Links</h5>
-
-            <ul class="list-unstyled">
-            <li>
-                <a href="#!">Link 1</a>
-            </li>
-            <li>
-                <a href="#!">Link 2</a>
-            </li>
-            <li>
-                <a href="#!">Link 3</a>
-            </li>
-            <li>
-                <a href="#!">Link 4</a>
-            </li>
-            </ul> {% endcomment %}
-
-        </div>
-        <!-- Grid column -->
-
-        </div>
-        <!-- Grid row -->
-
-    </div>
-    <!-- Footer Links -->
-
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2020 Copyright:
-        <a href="http://demidob.site/"> DEM!DOB & EMEL!ANOB</a>
-    </div>
-    <!-- Copyright -->
-
-    </footer>
-    <!-- Footer -->
 
 </body>
 </html>

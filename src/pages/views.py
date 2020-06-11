@@ -29,12 +29,36 @@ def homepage_view(request, *agrs, **kwargs):
 
     productsRows, categories = getProductsCatrows()
 
+    name = "!"
+
+    withDiscount = []
+    betterDisc = [0, productsRows[categories[0]][0], 0]
+
+    counter = 0
+    for cat in productsRows:
+        for pr in productsRows[cat]:
+            if not pr.discount == 0:
+                if pr.discount > betterDisc[0]:
+                    betterDisc[0] = pr.discount
+                    betterDisc[1] = pr
+                    betterDisc[2] = counter
+                withDiscount.append(pr)
+                counter += 1
+
+    # Removing object with the best discount from the 'withDiscount' list:
+    withDiscount.remove(withDiscount[betterDisc[2]])
+
+    print("BD", betterDisc)
+
+    name = ",<br>Даниил!"
+
     myContext = {
         "title": "Главная",
-        "categories": categories
+        "products": productsRows,
+        "discProducts": withDiscount,
+        "betterDisc": [betterDisc[1], ],
+        "name": name
     }
-
-    myContext["products"] = productsRows
 
     return render(request, "home.html", myContext)
 

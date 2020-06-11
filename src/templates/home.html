@@ -3,25 +3,134 @@
 {% load static %}
 
 {% block title %}
-    {{ title }}
+		{{ title }}
 {% endblock title %}
 
+{% block hc %}
+	invis
+{% endblock %}
+
 {% block page_title %}
-    {{ title }}
+		{{ title }}
 {% endblock page_title %}
 
 {% block additional_styles %}
-  <link rel="stylesheet" href="{% static 'styles/product_block.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/product_block.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/home_page.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/own_carousel.css' %}">
 {% endblock additional_styles %}
 
-<a class="dropdown-item" href="#">Помидоры</a>
-
 {% block nav_seeds %}
-    {% for pr in products.семена %}
-        <a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
-    {% endfor %}
+		{% for pr in products.семена %}
+				<a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
+		{% endfor %}
 {% endblock nav_seeds %}
 
 {% block content %}
+	
+	<div class="row">
+			<div class="futureColMd7">
+					<div class="contentTitle absolute_me" id="center_me">Добро пожаловать{{name|safe}}</div>
+					<div id="discAnouncement" class="invis">На данные товары сейчас действуют скидки:</div>
+			</div>
 
+			<div class="futureColMd5 invis">
+			
+				
+				<div class="" >
+
+					<div id="carouselExampleIndicators" class="carousel slide disCarousel" data-ride="carousel">
+						
+						<div class="carousel-inner">
+							
+							{# Product with the best discount: #}
+
+							{% for pr in betterDisc %}
+								<div class="carousel-item active">
+									
+										<div class="productDiv carProductDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+												<img	src="{{pr.icon}}" class="productIcon" alt="">
+												<div class="productInfo">
+														<b class="productName">{{pr.title}}</b>
+														<p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
+												</div>
+												<hr>
+												<div class="priceBuy">
+														<b class="productPrice">{{pr.price}}
+																<span class="discount">
+																	 (-{{pr.discount}}%)
+																</span>
+														</b>
+														<a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
+												</div>
+										</div>
+		
+								</div>
+							{% endfor %}
+
+							{# Other products with just regular discounts: #}
+							
+							{% for pr in discProducts %}
+								<div class="carousel-item">
+									
+										<div class="productDiv carProductDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+												<img	src="{{pr.icon}}" class="productIcon" alt="">
+												<div class="productInfo">
+														<b class="productName">{{pr.title}}</b>
+														<p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
+												</div>
+												<hr>
+												<div class="priceBuy">
+														<b class="productPrice">{{pr.price}}
+																<span class="discount">
+																	 (-{{pr.discount}}%)
+																</span>
+														</b>
+														<a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
+												</div>
+										</div>
+		
+								</div>
+							{% endfor %}
+							
+							
+						</div>
+
+						<a class="carousel-control-prev carouselControl" href="#carouselExampleIndicators" role="button" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="carousel-control-next carouselControl" href="#carouselExampleIndicators" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				</div>
+
+			</div>
+	</div>
+					
+
+	
+
+		<div class="page_block text-center">
+
+			<div class="row">
+				
+				<div class="col-md-5 my-auto">
+					<div class="logo_vid_container">
+						<img src="" class="logo_vid"></img>
+					</div>
+				</div>
+
+			<div class="col-md-7">
+				<div class="contentSubtitle">Как добраться</div>
+				<div class="block_content">
+					<div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/dachnik/1015190402/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Дачник</a><a href="https://yandex.ru/maps/192/vladimir/category/gardening_shop/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Магазин для садоводов во Владимире</a><a href="https://yandex.ru/maps/192/vladimir/category/seed_store/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Магазин семян во Владимире</a><iframe src="https://yandex.ru/map-widget/v1/-/CCQdn0eZKD" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<script src={% static "scripts/main_page_intro.js" %}></script>
 {% endblock content %}

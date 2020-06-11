@@ -1,0 +1,21 @@
+.disCarousel {
+	/*padding-left: 30px;
+	padding-right: 30px;*/
+}
+
+.carProductDiv {
+	margin-top: 0;
+}
+
+.carouselControl {
+	background-color: rgba(0, 0, 0, .2);
+	margin-top: 170px;
+	margin-bottom: 170px;
+}
+
+.carousel-control-prev, .carousel-control-next {
+	width: 30px;
+	/*border-radius: 100%;*/
+	/*height: 30px;*/
+}
+

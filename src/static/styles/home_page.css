@@ -1,0 +1,64 @@
+body {
+}
+
+.logo_vid_container {
+	text-align: center;
+	/*margin-top: 27px;*/
+	/*background-color: red;*/
+	width: 100%;
+	/*height: 100%;*/
+}
+
+.logo_vid {
+	width: 100%;
+}
+
+#discAnouncement {
+	font-size: 20px;
+	color: #657B66;
+	margin-top: 17px;
+	margin-bottom: 17px;
+}
+
+.push_right {
+	margin-left: 100%;
+}
+
+
+    
+    @media(max-width: 999px) {
+        .contentTitle {
+            font-size: 35px;
+            color:#657B66;
+            font-weight:bold;
+        }
+    }
+
+	@media(min-width: 1000px) {
+		.absolute_me {
+			font-size: 100px;
+		}
+    }
+    
+    @media(max-width: 999px) {
+		.absolute_me {
+			font-size: 65px;
+		}
+    }
+
+.normalizeMe {
+	transition: 2s;
+}
+
+#center_me {
+}
+
+.invis {
+	opacity: 0;
+	transition: 2s;
+}
+
+.vis {
+	opacity: 1;
+	transition: 2s;
+}
