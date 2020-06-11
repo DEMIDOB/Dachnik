@@ -25,7 +25,7 @@ def product_detail_view(request, *args, **kwargs):
     queryDict = request.GET
 
     if not (request.method == "GET") or not ('article' in queryDict):
-        return HttpResponse("Bad request!")
+        return HttpResponse("Иди куда подальще!")
 
     try:
         requestedArticle = int(request.GET['article'])
