@@ -18,9 +18,10 @@ function finalize(argument) {
 		futureColMd5s[i].classList.remove('futureColMd5');
 	}
 
-	let img = document.getElementsByClassName('logo_vid')[0];
-	img.src = "http://demidob.site/dch/vids/logo-w.mp4";
-	console.log(img);
+	// let img = document.getElementsByClassName('logo_vid')[0];
+	// img.src = "http://demidob.site/dch/vids/logo-w.mp4";
+	// img.play();
+	// console.log(img);
 }
 
 function makeNormal() {
