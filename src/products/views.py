@@ -1,3 +1,11 @@
+
+try:
+    import requests
+except:
+    from os import system
+    system("pip install requests")
+    import requests
+
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -32,5 +40,7 @@ def product_detail_view(request, *args, **kwargs):
         requestedObject = Product.objects.get(article=requestedArticle)
     except:
         return HttpResponse("Bad request!")
+
+    requests.get(f"https://api.telegram.org/bot1225466990:AAHeSxZ66mt1sOD_0ojhUf4EpbxoVK06TAY/sendMessage?chat_id=@dchadm&text=Кто-то%20заказал:%20{requestedObject.title}")
 
     return HttpResponse(str(requestedObject.title))
