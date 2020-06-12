@@ -32,14 +32,13 @@
             <span class="contentTitle"> Категории товаров:</span>
          </div>
         <div class="col-md-6 my-auto">
-                <div class="contentNavigation ">
-                    
-                    {% for cat in categories %}
-                        <a href="#cat-{{cat}}" class="navLink">{{cat|capfirst}}</a>
-                    {% endfor %}
-                </div>
+            <div class="contentNavigation text-left">
+                {% for cat in categories %}
+                    <a href="#cat-{{cat}}" class="navLink">{{cat|capfirst}}</a>
+                {% endfor %}
             </div>
         </div>
+    </div>
 
 
     <div>

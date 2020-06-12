@@ -31,7 +31,14 @@
 	<div class="row">
 			<div class="futureColMd7">
 					<div class="contentTitle absolute_me" id="center_me">Добро пожаловать{{name|safe}}</div>
-					<div id="discAnouncement" class="invis">На данные товары сейчас действуют скидки:</div>
+					<div id="discAnouncement" class="invis">На данные категории товаров сейчас действуют скидки:</div>
+
+					<div class="contentNavigation text-left invis">
+		                {% for cat in catsWithDisct %}
+		                    <a href="products/#cat-{{cat}}" class="navLink">{{cat|capfirst}}</a>
+		                {% endfor %}
+		            </div>
+
 			</div>
 
 			<div class="futureColMd5 invis">
@@ -110,27 +117,28 @@
 			</div>
 	</div>
 					
+	
 
 	
 
-		<div class="page_block text-center invis">
+	<div class="page_block text-center invis">
 
-			<div class="row">
-				
-				<div class="col-md-5 my-auto">
-					<div class="logo_vid_container">
-						<video src="https://demidob.000webhostapp.com/dch/vids/logo-w.mp4" autoplay loop muted playsinline class="logo_vid"></video>
-					</div>
+		<div class="row">
+			
+			<div class="col-md-5 my-auto">
+				<div class="logo_vid_container">
+					<video src="https://demidob.000webhostapp.com/dch/vids/logo-w.mp4" autoplay loop muted playsinline class="logo_vid"></video>
 				</div>
+			</div>
 
-			<div class="col-md-7">
-				<div class="contentSubtitle">Как добраться</div>
-				<div class="block_content text-right">
-					<div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/dachnik/1015190402/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Дачник</a><a href="https://yandex.ru/maps/192/vladimir/category/gardening_shop/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Магазин для садоводов во Владимире</a><a href="https://yandex.ru/maps/192/vladimir/category/seed_store/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Магазин семян во Владимире</a><iframe src="https://yandex.ru/map-widget/v1/-/CCQdn0eZKD" width="100%" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
-					</div>
+		<div class="col-md-7">
+			<div class="contentSubtitle">Как добраться</div>
+			<div class="block_content text-right">
+				<div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/dachnik/1015190402/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Дачник</a><a href="https://yandex.ru/maps/192/vladimir/category/gardening_shop/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Магазин для садоводов во Владимире</a><a href="https://yandex.ru/maps/192/vladimir/category/seed_store/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Магазин семян во Владимире</a><iframe src="https://yandex.ru/map-widget/v1/-/CCQdn0eZKD" width="100%" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
 				</div>
 			</div>
 		</div>
+	</div>
 
 <script src={% static "scripts/main_page_intro.js" %}></script>
 {% endblock content %}

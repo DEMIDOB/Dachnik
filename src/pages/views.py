@@ -32,6 +32,7 @@ def homepage_view(request, *agrs, **kwargs):
     name = "!"
 
     withDiscount = []
+    catsWithDisct = []
     betterDisc = [0, productsRows[categories[0]][0], 0]
 
     counter = 0
@@ -43,6 +44,8 @@ def homepage_view(request, *agrs, **kwargs):
                     betterDisc[1] = pr
                     betterDisc[2] = counter
                 withDiscount.append(pr)
+                if pr.category.lower() not in catsWithDisct:
+                    catsWithDisct.append(pr.category.lower())
                 counter += 1
 
     # Removing object with the best discount from the 'withDiscount' list:
@@ -56,6 +59,7 @@ def homepage_view(request, *agrs, **kwargs):
         "title": "Главная",
         "products": productsRows,
         "discProducts": withDiscount,
+        "catsWithDisct": catsWithDisct,
         "betterDisc": [betterDisc[1], ],
         "name": name
     }

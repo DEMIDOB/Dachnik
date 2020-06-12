@@ -69,16 +69,19 @@
     .contentNavigation {
         width: 100%;
         display: inline-block;
-        border-bottom: 1px #707070 solid;
     }
     .navLink {
         color: #526858;
         font-size:25px;
         margin-right: 33px;
+        
+        border-bottom: 1px #707070 solid;
         transition:  0.2s;
     }
     .navLink:hover{
         color: #324136;
+
+        border-bottom: 2px #707070 solid;
         transition:  0.2s;
         text-decoration: none;
     }
