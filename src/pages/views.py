@@ -3,6 +3,9 @@ from django.shortcuts import render
 from products.models import Product
 
 from products.gets import *
+from feedback.forms import FeedbackForm
+
+import pickle
 
 # Create your views here.
 
@@ -26,10 +29,9 @@ def allproducts_view(request, *args, **kwargs):
 
 
 def homepage_view(request, *agrs, **kwargs):
+    cookies = request.COOKIES
 
     productsRows, categories = getProductsCatrows()
-
-    name = "!"
 
     withDiscount = []
     catsWithDisct = []
@@ -52,8 +54,8 @@ def homepage_view(request, *agrs, **kwargs):
     withDiscount.remove(withDiscount[betterDisc[2]])
 
     print("BD", betterDisc)
-
-    name = ",<br>Даниил!"
+    
+    name = request.session.get('name', "!")
 
     myContext = {
         "title": "Главная",
@@ -61,9 +63,12 @@ def homepage_view(request, *agrs, **kwargs):
         "discProducts": withDiscount,
         "catsWithDisct": catsWithDisct,
         "betterDisc": [betterDisc[1], ],
-        "name": name
+        "name": name,
+        'form': FeedbackForm()
     }
 
-    return render(request, "home.html", myContext)
+    reponse = render(request, "home.html", myContext)
+
+    return reponse
 
 

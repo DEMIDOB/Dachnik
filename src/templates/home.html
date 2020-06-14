@@ -31,13 +31,16 @@
 	<div class="row">
 			<div class="futureColMd7">
 					<div class="contentTitle absolute_me" id="center_me">Добро пожаловать{{name|safe}}</div>
-					<div id="discAnouncement" class="invis">На данные категории товаров сейчас действуют скидки:</div>
+					<div id="discAnouncement" class="invis">
+						На данные категории товаров сейчас действуют скидки:
+						<div class="contentNavigation text-left">
+			                {% for cat in catsWithDisct %}
+			                    <a href="products/#cat-{{cat}}" class="navLink">{{cat|capfirst}}</a>
+			                {% endfor %}
+			            </div>
+					</div>
 
-					<div class="contentNavigation text-left invis">
-		                {% for cat in catsWithDisct %}
-		                    <a href="products/#cat-{{cat}}" class="navLink">{{cat|capfirst}}</a>
-		                {% endfor %}
-		            </div>
+					
 
 			</div>
 
@@ -138,6 +141,14 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class="page_block">
+		<form action="/pf/" method="post" content='text/html; charset=UTF-8' accept-charset="UTF-8">
+			{% csrf_token %}
+			{{ form }}
+			<input type="submit" value="Submit">
+		</form>
 	</div>
 
 <script src={% static "scripts/main_page_intro.js" %}></script>
