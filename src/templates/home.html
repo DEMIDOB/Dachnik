@@ -31,7 +31,7 @@
 	<div class="row">
 			<div class="futureColMd7">
 					<div class="contentTitle absolute_me" id="center_me">Добро пожаловать{{name|safe}}</div>
-					<div id="discAnouncement" class="invis">
+					<div id="discAnouncement" class="invis contentSubSubTitle">
 						На данные категории товаров сейчас действуют скидки:
 						<div class="contentNavigation text-left">
 			                {% for cat in catsWithDisct %}
@@ -144,11 +144,31 @@
 	</div>
 
 	<div class="page_block">
-		<form action="/pf/" method="post" content='text/html; charset=UTF-8' accept-charset="UTF-8">
-			{% csrf_token %}
-			{{ form }}
-			<input type="submit" value="Submit">
-		</form>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="contentSubtitle">
+					Обратная связь:
+				</div>
+				<div class="contentSubSubTitle">
+					Тут вы можете задать вопрос или оставить отзыв
+				</div>
+			</div>
+				<div class="col-md-7">	
+					<div class="feedbackForm">		
+						<div class="text-center"><div class="contentSubtitle" style="border-bottom: 1px #707070 solid; display: inline-block; margin-bottom:26px;">Напишите нам</div></div>
+
+						<form action="/pf/" method="post" content="text/html; charset=UTF-8" accept-charset="UTF-8">
+			   				{% csrf_token %}
+			   				<div class="feedbackContent contentSubSubTitle"><label for="id_name">Имя:</label><input  class="feedbackInput"type="text" name="name" maxlength="50" required="" id="id_name"></div>
+							<div class="feedbackContent contentSubSubTitle"><label for="id_topic">Тема обращения:</label><input  class="feedbackInput"type="text" name="topic" maxlength="100" required="" id="id_topic"></div>
+							<div class="feedbackContent contentSubSubTitle"><label for="id_body">Тело:</label><textarea class="feedbackInput" name="body"  cols="20" rows="5" maxlength="250" required="" id="id_body" style="resize:none;"></textarea></div>
+							<div class="feedbackContent contentSubSubTitle"><label for="id_email">E-Mail:</label><input class="feedbackInput" type="email" name="email" required="" id="id_email"></div>
+			   				<div class="text-right "><input type="submit" class="btn btn-success" value="Отправить"></div>
+		  				</form>
+	  				</div>
+  				</div>
+
+  		</div>
 	</div>
 
 <script src={% static "scripts/main_page_intro.js" %}></script>

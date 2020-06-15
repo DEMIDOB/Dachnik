@@ -61,3 +61,16 @@ body {
 	opacity: 1;
 	transition: 2s;
 }
+.feedbackForm {
+	border: 8px solid #708E6E;
+	padding:3vw;
+}
+.feedbackContent {
+	display:flex;
+	justify-content: space-between;
+	margin-bottom: 13px;
+}
+.feedbackInput {
+	width:45%;
+}
+
