@@ -46,34 +46,35 @@
 
     {% for cat in categories %}
         <div class="productsRow" id="cat-{{cat}}">
-        <span class="contentSubtitle"> {{cat|capfirst}} </span>
-        <div class="row">
-        {% for pr in products|get_by_index:cat %}
-            
-                <div class="col-lg-4">
-                    <div class="productDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
-                        <img  src="{{pr.icon}}" class="productIcon" alt="">
-                        <div class="productInfo">
-                            <b class="productName">{{pr.title}}</b>
-                            <p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
-                        </div>
-                        <hr>
-                        <div class="priceBuy">
-                            <b class="productPrice">{{pr.price}}
-                                <span class="discount">
-                                    {% if not pr.discount == 0 %}
-                                      (-{{pr.discount}}%)
-                                    {% endif %}
-                                </span>
-                            </b>
-                            <a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
+            <hr>
+            <span class="contentSubtitle"> {{cat|capfirst}} </span>
+            <div class="row">
+            {% for pr in products|get_by_index:cat %}
+                
+                    <div class="col-lg-4">
+                        <div class="productDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+                            <img  src="{{pr.icon}}" class="productIcon" alt="">
+                            <div class="productInfo">
+                                <b class="productName">{{pr.title}}</b>
+                                <p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
+                            </div>
+                            <hr>
+                            <div class="priceBuy">
+                                <b class="productPrice">{{pr.price}}
+                                    <span class="discount">
+                                        {% if not pr.discount == 0 %}
+                                          (-{{pr.discount}}%)
+                                        {% endif %}
+                                    </span>
+                                </b>
+                                <a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
 
-        {% endfor %}
-        </div>
+            {% endfor %}
+            </div>
         </div>
 
     {% endfor %}
