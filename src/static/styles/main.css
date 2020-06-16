@@ -1,4 +1,28 @@
 
+
+
+#uplink {
+    padding: 5px;
+
+    position: fixed;
+    left: 100%;
+    top: 100%;
+    transform: translate(-140%, -140%);
+
+    background-color: rgb(155, 132, 151, .3);
+    filter: invert();
+    border-radius: 100%;
+
+    transition: .5s;
+}
+
+#uplink:hover {
+    background-color: rgb(155, 132, 151, .8);
+
+    transition: .5s;
+}
+
+
     /*HEADER*/
     header {
         color: white;
@@ -109,29 +133,4 @@
     color: #657B66;
     margin-top: 17px;
     margin-bottom: 17px;
-}
-
-
-
-#uplink {
-    padding: 5px;
-
-    position: fixed;
-    left: 100%;
-    top: 100%;
-    transform: translate(-140%, -140%);
-
-    background-color: rgb(155, 132, 151);
-    filter: invert();
-    border-radius: 100%;
-
-    opacity: .3;
-
-    transition: .5s;
-}
-
-#uplink:hover {
-    opacity: .8;
-
-    transition: .5s;
 }
