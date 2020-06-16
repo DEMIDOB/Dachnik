@@ -24,7 +24,9 @@
 {% endblock nav_seeds %}
 
 {% block content %}
-
+    <script>
+        !window.jQuery && document.write('<script src="/static/js/jquery-1.10.2.min.js"><\/script>');
+    </script>
     
 
     <div class="row">
@@ -34,7 +36,7 @@
         <div class="col-md-6 my-auto">
             <div class="contentNavigation text-left">
                 {% for cat in categories %}
-                    <a href="#cat-{{cat}}" class="navLink">{{cat|capfirst}}</a>
+                    <a href="#" onclick="waveScrollTo($('#cat-{{cat}}').offset().top,500);" class="navLink">{{cat|capfirst}}</a>
                 {% endfor %}
             </div>
         </div>
@@ -67,7 +69,7 @@
                                         {% endif %}
                                     </span>
                                 </b>
-                                <a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
+                                <a href="/products/product?article={{pr.article}}&amount=1" class="productBuyButton">Купить</a>
                             </div>
                         </div>
                     </div>
@@ -78,7 +80,6 @@
         </div>
 
     {% endfor %}
-
 
 
 

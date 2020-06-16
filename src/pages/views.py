@@ -21,9 +21,11 @@ def allproducts_view(request, *args, **kwargs):
     myContext["products"] = avProducts
     print(productRows)
 
-    for avpr in avProducts:
-        if avpr.category.lower() == "семена":
-            myContext["seeds"].append(avpr)
+    # for avpr in avProducts:
+    #     if avpr.category.lower() == "семена":
+    #         myContext["seeds"].append(avpr)
+
+    myContext["seeds"] = avProducts.filter(category__iexact="семена")
 
     return render(request, "allproducts.html", myContext)
 
