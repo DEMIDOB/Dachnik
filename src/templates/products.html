@@ -16,6 +16,7 @@
 
 
 {% load getByIndex %}
+{% load calcPrice %}
 
 {% block nav_seeds %}
     {% for pr in products.семена %}
@@ -61,15 +62,27 @@
                                 <p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
                             </div>
                             <hr>
-                            <div class="priceBuy">
-                                <b class="productPrice">{{pr.price}}
-                                    <span class="discount">
-                                        {% if not pr.discount == 0 %}
-                                          (-{{pr.discount}}%)
-                                        {% endif %}
-                                    </span>
-                                </b>
-                                <a href="/products/product?article={{pr.article}}&amount=1" class="productBuyButton">Купить</a>
+                            <div class="priceBuy text-left">
+
+                                {% if pr.discount == 0 %}
+                                    <b class="productPrice">{{pr.price}} ₽</b>
+                                {% endif %}
+
+                                {% if not pr.discount == 0 %}
+                                    <div class="productPrice">
+                                        <s>{{pr.price}}</s>
+                                        <b class="productPrice">
+                                            {{pr|calc_price}} ₽
+                                            <br>
+                                            <div class="discount">
+                                                (-{{pr.discount}}%)
+                                            </div>
+                                        </b>
+                                    </div>
+                                    
+                                {% endif %}
+
+                                <a href="/cart/add/?article={{pr.article}}&amount=1" class="productBuyButton" onclick="buyButtonPressed('/products/product?article={{pr.article}}&amount=1')" data-toggle="modal" data-target=".bd-example-modal-lg">Купить</a>
                             </div>
                         </div>
                     </div>
@@ -80,6 +93,14 @@
         </div>
 
     {% endfor %}
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="detail_view_content">
+          
+        </div>
+      </div>
+    </div>
 
 
 

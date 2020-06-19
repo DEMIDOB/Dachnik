@@ -22,4 +22,4 @@ def process_feedback_view(request, *args, **kwargs):
 			request.session['name'] = f",<br>{name}!"
 			return response
 	
-	return HttpResponse('xui')
+	return HttpResponse('Error')

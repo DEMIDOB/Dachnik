@@ -26,6 +26,8 @@
 		{% endfor %}
 {% endblock nav_seeds %}
 
+{% load calcPrice %}
+
 {% block content %}
 	
 	<div class="row">
@@ -68,14 +70,28 @@
 														<p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
 												</div>
 												<hr>
-												<div class="priceBuy">
-														<b class="productPrice">{{pr.price}}
-																<span class="discount">
-																	 (-{{pr.discount}}%)
-																</span>
-														</b>
-														<a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
-												</div>
+												<div class="priceBuy text-left">
+
+					                                {% if pr.discount == 0 %}
+					                                    <b class="productPrice">{{pr.price}} ₽</b>
+					                                {% endif %}
+
+					                                {% if not pr.discount == 0 %}
+					                                    <div class="productPrice">
+					                                        <s>{{pr.price}}</s>
+					                                        <b class="productPrice">
+					                                            {{pr|calc_price}} ₽
+					                                            <br>
+					                                            <div class="discount">
+					                                                (-{{pr.discount}}%)
+					                                            </div>
+					                                        </b>
+					                                    </div>
+					                                    
+					                                {% endif %}
+
+					                                <a href="/cart/add/?article={{pr.article}}&amount=1" class="productBuyButton" onclick="buyButtonPressed('/products/product?article={{pr.article}}&amount=1')" data-toggle="modal" data-target=".bd-example-modal-lg">Купить</a>
+					                            </div>
 										</div>
 		
 								</div>
@@ -93,14 +109,28 @@
 														<p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
 												</div>
 												<hr>
-												<div class="priceBuy">
-														<b class="productPrice">{{pr.price}}
-																<span class="discount">
-																	 (-{{pr.discount}}%)
-																</span>
-														</b>
-														<a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
-												</div>
+												<div class="priceBuy text-left">
+
+					                                {% if pr.discount == 0 %}
+					                                    <b class="productPrice">{{pr.price}} ₽</b>
+					                                {% endif %}
+
+					                                {% if not pr.discount == 0 %}
+					                                    <div class="productPrice">
+					                                        <s>{{pr.price}}</s>
+					                                        <b class="productPrice">
+					                                            {{pr|calc_price}} ₽
+					                                            <br>
+					                                            <div class="discount">
+					                                                (-{{pr.discount}}%)
+					                                            </div>
+					                                        </b>
+					                                    </div>
+					                                    
+					                                {% endif %}
+
+					                                <a href="/cart/add/?article={{pr.article}}&amount=1" class="productBuyButton" onclick="buyButtonPressed('/products/product?article={{pr.article}}&amount=1')" data-toggle="modal" data-target=".bd-example-modal-lg">Купить</a>
+					                            </div>
 										</div>
 		
 								</div>
@@ -135,10 +165,7 @@
 					<hr>				
 					<div class="contentSubSubTitle">
 						Телефон: 44-51-62 
-						<div>
-							<a href="https://vk.com/dachnik_vladimir" target="_blank"><img src="http://demidob.site/dch/imgs/vk.png"  alt="VK"></a>
-							<a href="https://invite.viber.com/?g2=AQBuZv3uOCxr10tU8t1qE6xWTgbfdks9h%2B4MxzevKcosXCzrYMzl5TOhUQYmhqEw&lang=ru" target="_blank"><img src="http://demidob.site/dch/imgs/viber.png" width="35px"  alt="Viber"></a>
-						</div>
+						{% include "social_links.html" %}
 					</div>
 					<hr>
 				</div>
@@ -193,6 +220,14 @@
 
   		</div>
 	</div>
+
+	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="detail_view_content">
+          
+        </div>
+      </div>
+    </div>
 
 <script src={% static "scripts/main_page_intro.js" %}></script>
 <script src={% static 'scripts/product_info.js' %}></script>

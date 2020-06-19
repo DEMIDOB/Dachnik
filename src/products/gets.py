@@ -8,9 +8,9 @@ def getAvailableProducts():
     avProducts = []
     for pr in allProducts:
         if pr.isAvailable:
-            newPrice = Decimal("{:.2f}".format(
-                pr.price - pr.price * pr.discount / 100))
-            pr.price = newPrice
+            # newPrice = Decimal("{:.2f}".format(
+            #     pr.price - pr.price * pr.discount / 100))
+            # pr.price = newPrice
             avProducts.append(pr)
 
     return avProducts

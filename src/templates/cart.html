@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block page_title %}
+    {{ title }}
+{% endblock page_title %}
+
+{% block additional_styles %}
+	<link rel="stylesheet" href="{% static 'styles/product_block.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/cart.css' %}">
+{% endblock additional_styles %}
+
+{% load getByIndex %}
+{% load calcPrice %}
+
+{% block nav_seeds %}
+    {% for pr in products.семена %}
+        <a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
+    {% endfor %}
+{% endblock nav_seeds %}
+
+{% block content %}
+
+	<div class="contentTitle">
+		Корзина
+	</div>
+
+	<div class="cartContent">
+
+        {% if cartProducts|length == 0 %}
+            <div class="text-left" style="margin-top:27px;">
+                <div class="contentSubtitle">Ваша корзина пуста.</div>
+                <div>
+                    <a href="/products/">Сделать заказы</a>
+                </div>
+            </div>
+        {% endif %}
+
+		{% for pr in cartProducts %}
+            <div class="cartElement row">
+			    <div class="col-9 my-auto">
+                    <div class="row">
+                        
+                        <div class="col-md-4 my-auto">
+                            <span class="contentSubtitle">{{pr.title}}</span>
+                        </div>
+                        <div class="col-md-8 text-md-center my-auto">
+
+                            <span class="cartElementPrice">
+                                <span class="productPrice">
+                                    <span>
+                                        {{pr|calc_price}}
+                                    </span>
+                                    <span class="discount">
+                                        {% if not pr.discount == 0 %}
+                                          (-{{pr.discount}}%)
+                                        {% endif %}
+                                    </span>
+                                    <span>
+                                        x <b>{{thisCart|get_by_index:pr.article}}</b> = 
+                                    </span>
+                                    <b>
+                                        {{pr|calc_final_price:thisCart}}
+                                    </b>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 my-auto">
+                    <div class="text-right">
+                        <a href="/cart/remove/?article={{pr.article}}">
+                            <img src="http://demidob.site/dch/imgs/icons/x.png" class="removeCartElementIcon" alt="x" width="50" height="50">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% if cartProducts|length != 0 %}
+            <div class="text-right" style="margin-top: 27px;">
+                <button class="btn btn-success">Оформить заказ</button>
+            </div>
+        {% endif %}		
+
+	</div>
+
+{% endblock content %}

@@ -10,10 +10,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from .gets import *
+from cart.get import u_cart
 
 # Create your views here.
 
 def products_view(request, *args, **kwargs):
+    thisCart = u_cart(request)
 
     productsRows, categories = getProductsCatrows()
 
@@ -24,12 +26,32 @@ def products_view(request, *args, **kwargs):
 
     myContext["products"] = productsRows
 
-    print(myContext)
+    print(productsRows['овощи'][0].price)
 
     return render(request, "products.html", myContext)
 
 
 def product_detail_view(request, *args, **kwargs):
+    thisCart = u_cart(request)
+    queryDict = request.GET
+    requestedArticle = int(request.GET['article'])
+    requestedObject = Product.objects.get(article=requestedArticle)
+    
+
+
+
+
+    myContext = {
+        "title": f"Купить {requestedObject.title}",
+        "pr": requestedObject
+    }
+
+    # requests.get(f"https://api.telegram.org/bot1225466990:AAHeSxZ66mt1sOD_0ojhUf4EpbxoVK06TAY/sendMessage?chat_id=@dchadm&text=Кто-то%20заказал:%20{requestedObject.title}")
+
+    return render(request, "product_details.html", myContext)
+
+def add_to_cart(request, *args, **kwargs):
+    thisCart = u_cart(request)
     queryDict = request.GET
 
     if not (request.method == "GET") or not ('article' in queryDict):
@@ -49,10 +71,4 @@ def product_detail_view(request, *args, **kwargs):
     if newAmount == 0:
         whetherAvailable = False
 
-    requestedObject.amount = newAmount
-    requestedObject.isAvailable = whetherAvailable
-    requestedObject.save()
-
-    # requests.get(f"https://api.telegram.org/bot1225466990:AAHeSxZ66mt1sOD_0ojhUf4EpbxoVK06TAY/sendMessage?chat_id=@dchadm&text=Кто-то%20заказал:%20{requestedObject.title}")
-
-    return HttpResponse(str(requestedObject.title))
+    return HttpResponse(requestedObject.title)

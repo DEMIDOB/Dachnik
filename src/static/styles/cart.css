@@ -1,0 +1,15 @@
+.cartElement {
+	border: 8px solid #708E6E;
+	padding:27px;
+
+    margin-top: 27px;
+}
+
+.removeCartElementIcon {
+	transition: 1s;
+}
+
+.removeCartElementIcon:hover {
+	transform: rotate(90deg);
+	transition: 1s;
+}

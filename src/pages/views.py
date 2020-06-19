@@ -4,33 +4,36 @@ from products.models import Product
 
 from products.gets import *
 from feedback.forms import FeedbackForm
+from cart.get import u_cart
 
 import pickle
 
 # Create your views here.
 
 
-def allproducts_view(request, *args, **kwargs):
-    myContext = {
-        "title": "Все товары",
-        "products": [],
-        "seeds": []
-    }
+# def allproducts_view(request, *args, **kwargs):
+#     myContext = {
+#         "title": "Все товары",
+#         "products": [],
+#         "seeds": []
+#     }
 
-    productRows, avProducts = getProductsRow()
-    myContext["products"] = avProducts
-    print(productRows)
+#     productRows, avProducts = getProductsRow()
+#     myContext["products"] = avProducts
+#     print(productRows)
 
-    # for avpr in avProducts:
-    #     if avpr.category.lower() == "семена":
-    #         myContext["seeds"].append(avpr)
+#     # for avpr in avProducts:
+#     #     if avpr.category.lower() == "семена":
+#     #         myContext["seeds"].append(avpr)
 
-    myContext["seeds"] = avProducts.filter(category__iexact="семена")
+#     myContext["seeds"] = avProducts.filter(category__iexact="семена")
 
-    return render(request, "allproducts.html", myContext)
+#     return render(request, "allproducts.html", myContext)
 
 
 def homepage_view(request, *agrs, **kwargs):
+    request.session['initialized'] = True
+    # thisCart = u_cart(request)
     cookies = request.COOKIES
 
     productsRows, categories = getProductsCatrows()

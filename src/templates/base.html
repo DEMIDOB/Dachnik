@@ -66,6 +66,9 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">О семенах</a>
                             </div>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/cart/">Корзина</a>
+                            </li>
                         </li>
                     </ul>
                     <p class="text-right">т. 44-51-62</p>
@@ -108,6 +111,7 @@
             <h5 class="text-uppercase">Магазин "Дачник"</h5>
             <p>Суздальский пр., 13, Владимир, Владимирская обл., 600016</p>
             <p>т. 44-51-62</p>
+            <p>{% include "social_links.html" %}</p>
 
         </div>
         <!-- Grid column -->
@@ -142,22 +146,13 @@
         <div class="col-md-3 mb-md-0 mb-3">
 
             <!-- Links -->
-            {% comment %} <h5 class="text-uppercase">Links</h5>
+            <h5 class="text-uppercase"></h5>
 
             <ul class="list-unstyled">
             <li>
-                <a href="#!">Link 1</a>
+                <a href="/cart/">Корзина</a>
             </li>
-            <li>
-                <a href="#!">Link 2</a>
-            </li>
-            <li>
-                <a href="#!">Link 3</a>
-            </li>
-            <li>
-                <a href="#!">Link 4</a>
-            </li>
-            </ul> {% endcomment %}
+            </ul>
 
         </div>
         <!-- Grid column -->
