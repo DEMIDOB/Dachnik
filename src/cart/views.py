@@ -7,6 +7,7 @@ from .models import Cart
 from .get import u_cart
 from .sets import addToCart, removeFromCart
 
+from pages.templatetags import calcPrice
 from products.models import Product
 from products.gets import getProductsCatrows
 
@@ -47,15 +48,17 @@ def user_cart_view(request, *args, **kwargs):
     productsRows, categories = getProductsCatrows()
     cartProducts = Product.objects.filter(isAvailable=True, article__in=thisCart)
 
-    print(cartProducts)
-    print(productsRows['овощи'][0].price)
+    totalPrice = 0
+    for cpr in cartProducts:
+        totalPrice += calcPrice.calc_final_price(cpr, thisCart)
 
     
     myContext = {
         "products": productsRows,
         "title": "Корзина",
         "cartProducts": cartProducts,
-        "thisCart": thisCart
+        "thisCart": thisCart,
+        "totalPrice": totalPrice
     }
 
     return render(request, "cart.html", myContext)

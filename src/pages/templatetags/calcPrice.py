@@ -17,4 +17,7 @@ def calc_price(pr):
 
 @register.filter
 def calc_final_price(pr, cart):
-    return Decimal("{:.2f}".format(pr.price - pr.price * pr.discount / 100)) * cart[pr.article]
+	print(cart)
+	amount = cart[str(pr.article)]
+	print(amount)
+	return Decimal("{:.2f}".format(pr.price - pr.price * pr.discount / 100)) * amount

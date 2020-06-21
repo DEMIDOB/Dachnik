@@ -17,6 +17,7 @@
 
 {% load getByIndex %}
 {% load calcPrice %}
+{% load totalPrice %}
 
 {% block nav_seeds %}
     {% for pr in products.семена %}
@@ -78,6 +79,9 @@
         {% endfor %}
 
         {% if cartProducts|length != 0 %}
+            <div class="text-right contentSubtitle" style="margin-top: 27px;">
+                Итого: {{totalPrice}}
+            </div>
             <div class="text-right" style="margin-top: 27px;">
                 <button class="btn btn-success">Оформить заказ</button>
             </div>
