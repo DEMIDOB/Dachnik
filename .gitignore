@@ -3,4 +3,5 @@ bin/
 lib/
 pyvenv.cfg
 .DS_Store
+safe.py
 **/__pycache__

@@ -1,10 +1,8 @@
 import vk_api
 from .models import BlogPost
+from .safe import vk_auth_data
 
-login = "+79620913377"
-password = "minecraft2004"
-
-vk_session = vk_api.VkApi(login, password)
+vk_session = vk_api.VkApi(vk_auth_data['login'], vk_auth_data['password'])
 vk_session.auth()
 
 def syncPosts():
