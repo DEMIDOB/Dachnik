@@ -5,6 +5,7 @@ from products.models import Product
 from products.gets import *
 from feedback.forms import FeedbackForm
 from cart.get import u_cart
+from blog.syncPosts import syncPosts
 
 import pickle
 
@@ -32,6 +33,7 @@ import pickle
 
 
 def homepage_view(request, *agrs, **kwargs):
+    syncPosts()
     request.session['initialized'] = True
     # thisCart = u_cart(request)
     cookies = request.COOKIES
