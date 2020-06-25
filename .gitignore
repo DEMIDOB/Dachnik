@@ -5,3 +5,4 @@ pyvenv.cfg
 .DS_Store
 safe.py
 **/__pycache__
+**/db.sqlite3
