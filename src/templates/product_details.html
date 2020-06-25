@@ -9,15 +9,97 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     {% load static %}
+
+    {% load getByIndex %}
+	{% load calcPrice %}
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/product_details.css' %}">
+
 	<title>{{title}}</title>
 </head>
 <body>
 	<div class="container">
-		{{pr.title}}
-		{{pr.description}}
-		<img src="{{pr.icon}}" alt="" width="360px" />
-		{{pr.price}}
-		<a href="/cart/add/?article={{pr.article}}&amount=1">Добавить в корзину</a>
+		<div class="product_details_content">
+			<div class="row">
+				<div class="col-lg-7">
+					<div class="contentTitle">{{pr.title}}</div>
+					<div class="divTovar">
+						<span class="contentSubtitle category">Категория:</span> 
+						<span class="contentSubSubTitle">{{pr.category}}</span>
+					<div class="divDiscription">
+						<div class="contentSubtitle category">Описание:</div>
+						<span class="contentSubSubTitle discription">{{pr.description}}</span>
+					</div>
+					</div>
+				</div>
+				<div class="col-lg-5 text-center">	
+					<div class="divProductIcon">
+						<img src="{{pr.icon}}" class="productIcon" alt="">
+					</div>
+					<div class="underImg text-center">
+						<div class="countPrice">
+							<div class="my-auto">
+								<span class="contentSubSubTitle">В наличии: {{pr.amount}} шт.</span>
+							</div>
+							<div class="">
+								{% if pr.discount == 0 %}
+	                                    <b class="productPrice">{{pr.price}} ₽</b>
+	                                {% endif %}
+
+	                                {% if not pr.discount == 0 %}
+	                                    <div class="productPrice">
+	                                        <b class="productPrice">
+	                                            {{pr|calc_price}} ₽
+	                                            <br>
+	                                            <div class="discount">
+	                                                (-{{pr.discount}}%)
+	                                            </div>
+	                                        </b>
+	                                    </div>
+	                                    
+	                                {% endif %}
+								{# <span class="productPrice">{{pr.price}}</span> #}
+								{# <span class="discount">(-50%)</span> #}
+							</div>
+						</div>
+					</div>
+
+					<div class="bottom ">			
+						<div class=" stepper">
+							<button class="btn btn-secondary" onclick='BtnOncl(this, "count1", {{pr.amount}})'>-</button>
+							<span id="count1">1</span>
+							<button class="btn btn-secondary" onclick='BtnOncl(this, "count1", {{pr.amount}})'>+</button>
+						</div>
+							<button class="btn btn-success" onclick="addToCart({{pr.article}})" data-toggle="modal" data-target="#cartSuccessModal">В корзину</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+
+	<div class="modal fade" id="cartSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLongTitle">{{pr.title}}</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        Успешно добавлено в корзину <span id="modalAmount">1</span> элемента
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+	        <a href="/cart/" class="btn btn-success">Перейти в корзину</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<script src='{% static "scripts/stepper.js" %}'></script>
+	<script src='{% static "srcipts/makeRequest.js" %}'></script>
+	<script src='{% static "scripts/addToCart.js" %}'></script>
 </body>
 </html>
