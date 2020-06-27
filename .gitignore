@@ -6,3 +6,4 @@ pyvenv.cfg
 safe.py
 **/__pycache__
 **/db.sqlite3
+**/vk_config.v2.json
