@@ -1,12 +1,15 @@
 from .models import Product
 
 from decimal import Decimal
-
+from reserve.get import *
 
 def getAvailableProducts():
     allProducts = Product.objects.all()
     avProducts = []
     for pr in allProducts:
+        print('\n', pr.amount)
+        pr.amount -= getReservation(pr.article)
+        print('\n', pr.amount)
         if pr.isAvailable:
             # newPrice = Decimal("{:.2f}".format(
             #     pr.price - pr.price * pr.discount / 100))

@@ -11,6 +11,7 @@ from django.shortcuts import render
 
 from .gets import *
 from cart.get import u_cart
+from reserve.get import *
 
 # Create your views here.
 
@@ -36,7 +37,7 @@ def product_detail_view(request, *args, **kwargs):
     queryDict = request.GET
     requestedArticle = int(request.GET['article'])
     requestedObject = Product.objects.get(article=requestedArticle)
-    
+    requestedObject.amount -= getReservation(requestedArticle)
 
 
 

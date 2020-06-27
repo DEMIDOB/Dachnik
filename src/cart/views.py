@@ -37,9 +37,12 @@ def add_to_cart_view(request, *args, **kwargs):
     except:
         return HttpResponse("Bad request!")
 
-    addToCart(request, requestedArticle, requestedAmount)
+    try:
+        addToCart(request, requestedArticle, requestedAmount)
+    except:
+        return HttpResponse('-1')
 
-    return HttpResponseRedirect('/cart/')
+    return HttpResponse('0')
     
 
 def user_cart_view(request, *args, **kwargs):
@@ -64,7 +67,6 @@ def user_cart_view(request, *args, **kwargs):
     return render(request, "cart.html", myContext)
 
 def remove_from_cart(request, *args, **kwargs):
-    response = HttpResponseRedirect("/cart/")
 
     if requiredMethod == "GET":
         queryDict = request.GET
@@ -80,7 +82,10 @@ def remove_from_cart(request, *args, **kwargs):
         requestedArticle = int(request.GET['article'])
     except:
         return HttpResponse("Bad request!")
-    
-    removeFromCart(request, requestedArticle)
 
-    return response
+    try:
+        removeFromCart(request, requestedArticle)
+    except:
+        return HttpResponse('-1')
+
+    return HttpResponseRedirect('/cart/')
