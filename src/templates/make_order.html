@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+		{{ title }}
+{% endblock title %}
+
+{% block hc %}
+	vis
+{% endblock %}
+
+{% block page_title %}
+		{{ title }}
+{% endblock page_title %}
+
+{% block additional_styles %}
+	<link rel="stylesheet" href="{% static 'styles/product_block.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/form.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/own_carousel.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/cart.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/order.css' %}">
+{% endblock additional_styles %}
+
+{% block nav_seeds %}
+		{% for pr in products.семена %}
+				<a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
+		{% endfor %}
+{% endblock nav_seeds %}
+
+{% load getByIndex %}
+{% load calcPrice %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="contentTitle">
+				Оформление заказа
+			</div>
+
+			<div class="orderContent">
+
+				{% for pr in cartProducts %}
+		            <div class="cartElement orderElement row">
+					    <div class="col-6 my-auto">
+		                    <div class="">
+		                        
+		                        <div class="my-auto">
+		                            <span class="contentSubtitle">{{pr.title}}</span>
+		                        </div>
+		                        <div class="text-left my-auto cartElementPrice">
+		                            {% comment %} TMP: {% endcomment %}
+		                            <span class="contentSubSubTitle">
+		                                Количество: <b>{{thisCart|get_by_index:pr.article}} шт.</b>
+		                            </span>
+
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="col-6 my-auto">
+
+		                    <div class="text-right">
+                                <span class="productPrice">
+                                    <b>
+                                        {{pr|calc_final_price:thisCart}} ₽
+                                    </b>
+                                </span>
+		                    </div>
+		                </div>
+		            </div>
+		        {% endfor %}
+
+		        {% if cartProducts|length != 0 %}
+		            <div class="text-right contentSubtitle" style="margin-top: 27px;">
+		                Итого: {{totalPrice}} ₽
+		            </div>
+		        {% endif %}		
+
+			</div>
+
+			<div class="contentSubSubTitle orderInfo">
+				Оформите заказ - сможете забрать его в магазине.
+			</div>
+
+		</div>
+		<div class="col-lg-6">
+			<form action="" method="post">
+				<div class="dForm">
+					<div class="text-center"><div class="contentSubtitle" style="border-bottom: 1px #707070 solid; display: inline-block; margin-bottom:26px;">Контактные данные</div></div>
+
+				
+					{% csrf_token %}
+
+					<input type="hidden" name="cartID" value="{{cartID}}">
+
+					<div class="dFormContent contentSubSubTitle">
+						<label for="id_name">Имя:</label>
+						<input class="dFormInput" type="text" name="name" maxlength="50" required="" id="id_name">
+					</div>
+					<div class="dFormContent contentSubSubTitle">
+						<label for="id_phone">Телефон:</label>
+						<input class="dFormInput" type="text" name="phone" maxlength="12" required="" id="id_phone" placeholder="Если что, мы свяжемся с Вами">
+					</div>
+					<div class="dFormContent contentSubSubTitle">
+						<label for="id_email">E-Mail:</label>
+						<input class="dFormInput" type="email" name="email" required="" id="id_email">
+					</div>
+					<div class="dFormContent contentSubSubTitle">
+						<label for="id_comment">Комментарий к заказу:</label>
+						<textarea class="dFormInput" cols="20" rows="5" name="comment" cols="40" rows="10" maxlength="500" required="" id="id_comment"></textarea>
+					</div>
+				</div>
+				<div class="text-right make_order_button"><input type="submit" class="btn btn-success" value="Оформить заказ"></div>
+			</form>
+		</div>
+	</div>
+{% endblock content %}

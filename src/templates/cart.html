@@ -42,7 +42,7 @@
 	<div class="container-fluid cartContent">
 
 		{% for pr in cartProducts %}
-            <div class="cartElement row">
+            <div class="cartElement block_border row">
 			    <div class="col-10 my-auto">
                     <div class="row">
                         
@@ -82,7 +82,7 @@
                 Итого: {{totalPrice}} ₽
             </div>
             <div class="text-right" style="margin-top: 27px;">
-                <button class="btn btn-success">Оформить заказ</button>
+                <a href="/order/" class="btn btn-success">Оформить заказ</a>
             </div>
         {% endif %}		
 

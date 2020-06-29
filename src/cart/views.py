@@ -55,6 +55,7 @@ def user_cart_view(request, *args, **kwargs):
     for cpr in cartProducts:
         totalPrice += calcPrice.calc_final_price(cpr, thisCart)
 
+    print(thisCart)
     
     myContext = {
         "products": productsRows,
