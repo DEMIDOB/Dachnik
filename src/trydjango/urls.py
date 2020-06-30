@@ -18,7 +18,7 @@ from pages.views import homepage_view
 from products.views import products_view, product_detail_view
 from feedback.views import process_feedback_view
 from cart.views import user_cart_view, add_to_cart_view, remove_from_cart
-from order.views import make_order_view
+from order.views import make_order_view, complete_order
 from django.urls import path
 
 urlpatterns = [
@@ -30,5 +30,6 @@ urlpatterns = [
     path('cart/', user_cart_view),
     path('cart/add/', add_to_cart_view),
     path('cart/remove/', remove_from_cart),
-    path('order/', make_order_view)
+    path('order/', make_order_view),
+    path('complete_order/', complete_order)
 ]

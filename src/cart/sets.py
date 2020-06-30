@@ -32,3 +32,8 @@ def removeFromCart(request, article):
     currentData.pop(str(article))
     thisCart.json = json.dumps(currentData)
     thisCart.save()
+
+def clearCart(request):
+    thisCart = u_cart(request)
+    thisCart.json = "{}"
+    thisCart.save()
