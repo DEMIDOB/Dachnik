@@ -47,6 +47,8 @@ def complete_order(request, *args, **kwargs):
     try:
         cartJSON = u_cart(request).json
         cartData = json.loads(cartJSON)
+        if len(cartData) < 1:
+            return HttpResponse("Вы не можете оформить один заказ дважды!")
 
         name  = queryDict['name']
         phone = queryDict['phone']
@@ -76,3 +78,9 @@ def complete_order(request, *args, **kwargs):
     sendOrderNotification(name, cartData, OrderObject.id, phone, email, comment)
 
     return HttpResponseRedirect(f'/thankyou/?oid={OrderObject.id}')
+
+
+
+def thankyou_view(request, *args, **kwargs):
+    return render(request, 'thankyou.html', {'oid': request.GET['oid']})
+

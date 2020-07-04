@@ -79,3 +79,5 @@ def homepage_view(request, *agrs, **kwargs):
     return reponse
 
 
+def page404_view(request, *args, **kwargs):
+    return render(request, "page_not_found.html")

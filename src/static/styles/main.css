@@ -138,3 +138,17 @@
 .block_border {
     border: 8px solid #708E6E;
 }
+.toMainLink:hover {
+    color:#708E6E;
+}
+
+.headerNavLink {
+    border-bottom: 1px rgba(0, 0, 0, 0) solid;
+    transition:0.5s;
+
+}
+.headerNavLink:hover {
+    border-bottom: 1px white solid;
+    transition:0.5s;
+
+}

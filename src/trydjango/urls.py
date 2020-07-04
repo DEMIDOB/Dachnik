@@ -14,11 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from pages.views import homepage_view
+from pages.views import homepage_view, page404_view
 from products.views import products_view, product_detail_view
 from feedback.views import process_feedback_view
 from cart.views import user_cart_view, add_to_cart_view, remove_from_cart
-from order.views import make_order_view, complete_order
+from order.views import make_order_view, complete_order, thankyou_view
 from django.urls import path
 
 urlpatterns = [
@@ -31,5 +31,7 @@ urlpatterns = [
     path('cart/add/', add_to_cart_view),
     path('cart/remove/', remove_from_cart),
     path('order/', make_order_view),
-    path('complete_order/', complete_order)
+    path('complete_order/', complete_order),
+    path('404/', page404_view),
+    path('thankyou/', thankyou_view)
 ]
