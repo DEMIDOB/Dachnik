@@ -7,7 +7,7 @@ except:
 
 from products.models import Product
 
-def sendOrderNotification(name, cartData, oid, phone, email, comment):
+def sendOrderNotification(name, cartData, oid, phone, email, comment, removeLink):
     productsOrder = ""
 
     counter = 1
@@ -27,6 +27,7 @@ def sendOrderNotification(name, cartData, oid, phone, email, comment):
 *Телефон:* {phone}
 *E-Mail:* {email}\n
 *Комментарий к заказу:*
-{comment}
+{comment}\n
+[Отменить заказ]({removeLink})
     """
     requests.get(f"https://api.telegram.org/bot1225466990:AAHeSxZ66mt1sOD_0ojhUf4EpbxoVK06TAY/sendMessage?chat_id=@dchadm&parse_mode=markdown&text={msg}")

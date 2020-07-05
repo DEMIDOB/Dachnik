@@ -15,6 +15,7 @@ from bot.order import sendOrderNotification
 from pages.templatetags import calcPrice
 from products.gets import getProductsCatrows
 from products.models import Product
+from reserve.sets import unreserve
 
 
 def make_order_view(request, *args, **kwargs):
@@ -75,10 +76,36 @@ def complete_order(request, *args, **kwargs):
 
     request.session['name'] = f",<br>{name}!"
 
-    sendOrderNotification(name, cartData, OrderObject.id, phone, email, comment)
+    sendOrderNotification(name, cartData, OrderObject.id, phone, email, comment, f"{request.get_host()}/remove_order?oid={OrderObject.id}")
 
     return HttpResponseRedirect(f'/thankyou/?oid={OrderObject.id}')
 
+
+def remove_order(request, *args, **kwargs):
+    queryDict = request.GET
+
+    if not request.method == "GET":
+        return HttpResponse(f"Wrong request method '{request.method}'! Expected 'GET'")
+
+    try:
+        oid = queryDict['oid']
+    except:
+        return HttpResponse(f"Not enough arguments!")
+
+    try:
+        targetOrder = Order.objects.get(id=oid)
+    except:
+        return HttpResponse(f"There is no such order!")
+
+    orderData = json.loads(targetOrder.json)
+
+    for orderElement in orderData:
+        elementAmount = orderData[orderElement]
+        unreserve(orderElement, elementAmount)
+
+    targetOrder.delete()
+
+    return HttpResponse(f"Ok!")
 
 
 def thankyou_view(request, *args, **kwargs):
