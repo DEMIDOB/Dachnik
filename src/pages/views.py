@@ -80,4 +80,4 @@ def homepage_view(request, *agrs, **kwargs):
 
 
 def page404_view(request, *args, **kwargs):
-    return render(request, "page_not_found.html")
+    return render(request, "404.html")

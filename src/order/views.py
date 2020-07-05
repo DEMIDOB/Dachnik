@@ -76,12 +76,30 @@ def complete_order(request, *args, **kwargs):
 
     request.session['name'] = f",<br>{name}!"
 
+    print(f"{request.get_host()}/remove_order?oid={OrderObject.id}")
+
     sendOrderNotification(name, cartData, OrderObject.id, phone, email, comment, f"{request.get_host()}/remove_order?oid={OrderObject.id}")
 
     return HttpResponseRedirect(f'/thankyou/?oid={OrderObject.id}')
 
-
 def remove_order(request, *args, **kwargs):
+    queryDict = request.GET
+
+    if not request.method == "GET":
+        return HttpResponse(f"Wrong request method '{request.method}'! Expected 'GET'")
+
+    try:
+        oid = queryDict['oid']
+    except:
+        return HttpResponse(f"Not enough arguments!")
+
+    myContext = {
+        'oid': f"{oid}"
+    }
+
+    return render(request, 'remove_order.html', myContext)
+
+def rm_o(request, *args, **kwargs):
     queryDict = request.GET
 
     if not request.method == "GET":
