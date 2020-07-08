@@ -1,0 +1,4 @@
+Django
+requests
+vk_bot
+django-phone-field
