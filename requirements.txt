@@ -1,4 +1,4 @@
 Django
 requests
-vk_bot
+vk_api
 django-phone-field
