@@ -1,0 +1,17 @@
+
+.dForm {
+	border: 8px solid #708E6E;
+	padding:3vw;
+}
+.dFormContent {
+	display:flex;
+	justify-content: space-between;
+	margin-bottom: 13px;
+}
+.dFormInput {
+	width:45%;
+}
+
+.make_order_button {
+	margin-top: 17px;
+}

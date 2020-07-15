@@ -15,7 +15,7 @@ body {
 
 #discAnouncement {
 	font-size: 20px;
-	/*color: #657B66;*/
+	color: #657B66;
 	margin-top: 17px;
 	margin-bottom: 17px;
 }
@@ -29,6 +29,7 @@ body {
     @media(max-width: 999px) {
         .contentTitle {
             font-size: 35px;
+            color:#657B66;
             font-weight:bold;
         }
     }

@@ -55,36 +55,46 @@
             {% for pr in products|get_by_index:cat %}
                 
                     <div class="col-lg-4">
-                        <div class="productDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
-                            <img  src="{{pr.icon}}" class="productIcon" alt="">
-                            <div class="productInfo">
-                                <b class="productName">{{pr.title}}</b>
-                                <p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
-                            </div>
-                            <hr>
-                            <div class="priceBuy text-left">
-
-                                {% if pr.discount == 0 %}
-                                    <b class="productPrice">{{pr.price}} ₽</b>
-                                {% endif %}
-
-                                {% if not pr.discount == 0 %}
-                                    <div class="productPrice">
-                                        <s>{{pr.price}}</s>
-                                        <b class="productPrice">
-                                            {{pr|calc_price}} ₽
-                                            <br>
-                                            <div class="discount">
-                                                (-{{pr.discount}}%)
+                        <div class="productCol text-center">
+                            <div class="productDiv text-center" style="background-image: url({{pr.icon}});" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+                                <div class="row" style="height: 100%;">
+                                    <div class="col-12 my-auto">
+                                        <div class="contentTitle productInfo">
+                                            <div class="productTitle">
+                                                {{pr.title}}
                                             </div>
-                                        </b>
-                                    </div>
-                                    
-                                {% endif %}
+                                            <div class="contentSubSubTitle productDesc">
+                                                {{pr.description}}
+                                            </div>
+                                            <div class="priceBuy text-left">
 
-                                <a href="/cart/add/?article={{pr.article}}&amount=1" class="productBuyButton" onclick="buyButtonPressed('/products/product?article={{pr.article}}&amount=1')" data-toggle="modal" data-target=".bd-example-modal-lg">Купить</a>
+                                                    {% if pr.discount == 0 %}
+                                                        <b class="productPrice">{{pr.price}} ₽</b>
+                                                    {% endif %}
+
+                                                    {% if not pr.discount == 0 %}
+                                                        <div class="productPrice">
+                                                            <s>{{pr.price}}</s>
+                                                            <b class="productPrice">
+                                                                {{pr|calc_price}} ₽
+                                                                <br>
+                                                                <div class="discount">
+                                                                    (-{{pr.discount}}%)
+                                                                </div>
+                                                            </b>
+                                                        </div>
+                                                        
+                                                    {% endif %}
+
+                                                    <a class="my-auto buyButton" href="/cart/add/?article={{pr.article}}&amount=1" class="productBuyButton" onclick="buyButtonPressed('/products/product?article={{pr.article}}&amount=1')" data-toggle="modal" data-target=".bd-example-modal-lg">Купить</a>
+                                                </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
 
 
@@ -101,9 +111,10 @@
         </div>
       </div>
     </div>
-
-
-
+    
 <script src={% static 'scripts/product_info.js' %}></script>
+
+
+
 {% endblock content %}
 

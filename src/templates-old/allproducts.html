@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block page_title %}
+    {{ title }}
+{% endblock page_title %}
+
+{% block additional_styles %}
+  <link rel="stylesheet" href="{% static 'styles/product_block.css' %}">
+{% endblock additional_styles %}
+
+
+
+
+{% block nav_seeds %}
+    {% for pr in seeds %}
+        <a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
+    {% endfor %}
+{% endblock nav_seeds %}
+
+{% block content %}
+    <div class="container-md" style="background-color: none;">
+        <div class="row">
+        {% for pr in products %}
+                <div class="col-lg-4">
+                    <div class="productDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+                        <img  src="{{pr.icon}}" class="productIcon" alt="">
+                        <div class="productInfo">
+                            <b class="productName">{{pr.title}}</b>
+                            <p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
+                        </div>
+                        <hr>
+                        <div class="priceBuy">
+                            <b class="productPrice">{{pr.price}}
+                                <span class="discount">
+                                    {% if not pr.discount == 0 %}
+                                      (-{{pr.discount}}%)
+                                    {% endif %}
+                                </span>
+                            </b>
+                            <a href="/products/product?article={{pr.article}}" class="productBuyButton">Купить</a>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+    </div>
+
+
+
+<script src={% static 'scripts/product_info.js' %}></script>
+{% endblock content %}

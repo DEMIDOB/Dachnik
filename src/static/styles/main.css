@@ -1,3 +1,196 @@
+@font-face {
+    font-family: 'mainFont';
+    src: url('http://demidob.000webhostapp.com/dch/fonts/12002.ttf');
+}
+
+body {
+    font-family: 'mainFont';
+}
+
+@media(max-width: 999px) {
+    body {
+        padding: 0;
+        padding-top: 25px;
+    }
+
+    .headerContent {
+        display: block;
+        background-position: right top;
+        background-size: 86% 170px;
+    }
+
+    #headerTitle {
+        font-size: 50px;
+        font-weight: bold;
+        color: #CC7654;
+
+        width: 200px;
+        height: 200px;
+
+        background-image: url('https://demidob.000webhostapp.com/dch/h/el.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 200px;
+
+        transition: 1s;
+    }
+}
+
+@media(min-width: 1000px) {
+    body {
+        padding: 50px;
+    }
+
+    .headerContent {
+        background-size: 85% 260px;
+        background-position: top right;
+
+        display: flex;
+        justify-content: flex-start;
+
+        margin-left: -35px;
+    }
+
+    nav {
+        margin-top: 120px;
+    }
+
+    #headerTitle {
+        font-size: 60px;
+        font-weight: bold;
+        color: #CC7654;
+
+        width: 280px;
+        height: 280px;
+
+        background-image: url('https://demidob.000webhostapp.com/dch/h/el.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 280px;
+
+        transition: 1s;
+    }
+}
+
+@media(min-width: 2000px) {
+    body {
+        padding-left: 20vw;
+        padding-right: 20vw;
+    }
+}
+
+
+/*HEADER*/
+header {
+    color: white;
+    /*background-image: linear-gradient(45deg, #5A6F5A 0%, #8CA894 50%);*/
+}
+
+.headerContent {
+    background-image: url('https://demidob.000webhostapp.com/dch/h/Header.png');
+    background-repeat: no-repeat;
+}
+
+.headerNavLink {
+    text-decoration: none;
+
+    opacity: 0.6;
+    font-size: 25px;
+
+    padding: 10px;
+
+    border-bottom: 1px rgba(0, 0, 0, 0) solid;
+    transition:0.5s;
+
+}
+.headerNavLink:hover {
+    text-decoration: none;
+
+    color: rgba(0, 0, 0, .6);
+    border-bottom: 1px white solid;
+    transition:0.5s;
+}
+
+#headerTitle:hover {
+    transform: rotate(-15deg);
+
+    transition: 1s;
+}
+
+#mpLink {
+    text-decoration: none;
+    color: inherit;
+    transition: 1s;
+}
+
+/*FOOTER*/
+.myfooter {
+    /*background-image: linear-gradient(45deg, #5A6F5A 0%, #8CA894 50%);*/
+    background-image: url('http://localhost/dch/h/Header-no-c.svg');
+    background-position: center top;
+    /*background-size: 90%;*/
+    background-repeat: no-repeat;
+    margin-top: 27px;
+    color: white;
+}
+
+.myfooter a {
+    color: white;
+}
+
+/*CUSTOM STYLES*/
+
+
+.contentTitle {
+    font-size:45px;
+    color: #CC7654;
+    font-weight:bold;
+}
+
+@media(max-width: 999px) {
+    .contentTitle {
+        font-size: 38px;
+    }
+}
+
+.contentSubtitle {
+    font-size: 35px;
+    font-weight:bold;
+    color: #7CA0D3;
+}
+.contentSubSubTitle {
+    font-size: 20px;
+    color: #7CA0D3;
+    margin-top: 17px;
+    margin-bottom: 17px;
+}
+.contentNavigation {
+    width: 100%;
+    display: inline-block;
+}
+.navLink {
+    color: rgb(103, 116, 104);
+    font-size:25px;
+    margin-right: 33px;
+    
+    border-bottom: 1px #707070 solid;
+    transition:  0.2s;
+}
+.navLink:hover{
+    color: rgb(103, 116, 104);
+
+    border-bottom: 2px #707070 solid;
+    transition:  0.2s;
+    text-decoration: none;
+}
+
+.content {
+    margin-top: 27px;
+}
+
+
+
+
 
 
 
@@ -23,104 +216,6 @@
 }
 
 
-    /*HEADER*/
-    header {
-        color: white;
-        background-image: linear-gradient(45deg, #5A6F5A 0%, #8CA894 50%);
-    }
-
-    header h1 {
-        font-weight: bold;
-        font-size: 90px;
-    }
-
-    @media(max-width: 999px) {
-        body {
-            padding: 0;
-        }
-    }
-
-    @media(min-width: 1000px) {
-        body {
-            padding: 50px;
-        }
-    }
-
-    @media(min-width: 2000px) {
-        body {
-            padding-left: 20vw;
-            padding-right: 20vw;
-        }
-    }
-
-    #logo_a {
-        color: white;
-        text-decoration: none;
-        transition: 0.5s;
-    }
-
-    #logo_a:hover {
-        color: rgba(255, 255, 255, 0.8);
-        transition: 0.5s;
-    }
-
-
-    /*FOOTER*/
-    .myfooter {
-        background-image: linear-gradient(45deg, #5A6F5A 0%, #8CA894 50%);
-        margin-top: 27px;
-        color: white;
-    }
-
-    .myfooter a {
-        color: white;
-    }
-
-    /*CUSTOM STYLES*/
-
-    
-    .contentTitle {
-       font-size:45px;
-        color:#657B66;
-        font-weight:bold;
-    }
-
-    .contentSubtitle {
-        font-size: 35px;
-        font-weight:bold;
-        color:#708E6E;
-    }
-    .contentNavigation {
-        width: 100%;
-        display: inline-block;
-    }
-    .navLink {
-        color: #526858;
-        font-size:25px;
-        margin-right: 33px;
-        
-        border-bottom: 1px #707070 solid;
-        transition:  0.2s;
-    }
-    .navLink:hover{
-        color: #324136;
-
-        border-bottom: 2px #707070 solid;
-        transition:  0.2s;
-        text-decoration: none;
-    }
-
-    .content {
-        margin-top: 27px;
-    }
-
-
-
-
-
-
-
-
 .page_block {
     margin-top: 108px;
 }
@@ -128,27 +223,10 @@
 .block_content {
     margin-top: 27px;
 }
-.contentSubSubTitle {
-    font-size: 20px;
-    color: #657B66;
-    margin-top: 17px;
-    margin-bottom: 17px;
-}
 
 .block_border {
-    border: 8px solid #708E6E;
+    border: 6px solid #CC7654;
 }
 .toMainLink:hover {
     color:#708E6E;
-}
-
-.headerNavLink {
-    border-bottom: 1px rgba(0, 0, 0, 0) solid;
-    transition:0.5s;
-
-}
-.headerNavLink:hover {
-    border-bottom: 1px white solid;
-    transition:0.5s;
-
 }

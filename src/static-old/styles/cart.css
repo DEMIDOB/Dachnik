@@ -1,15 +1,7 @@
 .cartElement {
-	/*padding: 10px;*/
-	padding-top: 10px;
-	padding-bottom: 10px;
-
-    border-radius: 53px;
+	padding: 20px;
 
     margin-top: 27px;
-}
-
-.cartElImg {
-	border-radius: 50%;
 }
 
 .removeCartElementIcon {

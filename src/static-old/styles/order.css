@@ -1,0 +1,14 @@
+.orderContent {
+	margin-top: 27px;
+	margin-bottom: 27px;
+	padding-bottom: 27px;
+
+	border-top: #707070 solid 1px;
+	border-bottom: #707070 solid 1px;
+}
+
+.orderElement {
+	/*padding-top: 0;
+	padding-bottom: 0;*/
+	padding: 0;
+}

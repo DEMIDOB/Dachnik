@@ -31,3 +31,7 @@ def sendOrderNotification(name, cartData, oid, phone, email, comment, removeLink
 [Отменить заказ]({removeLink})
     """
     requests.get(f"https://api.telegram.org/bot1225466990:AAHeSxZ66mt1sOD_0ojhUf4EpbxoVK06TAY/sendMessage?chat_id=@dchadm&parse_mode=markdown&text={msg}")
+
+def sendCancelledOrderNotification(oid):
+    msg = f"*Отмена заказа №{oid}*"
+    requests.get(f"https://api.telegram.org/bot1225466990:AAHeSxZ66mt1sOD_0ojhUf4EpbxoVK06TAY/sendMessage?chat_id=@dchadm&parse_mode=markdown&text={msg}")

@@ -27,56 +27,55 @@
 <body id="body" style class>
     <header class="{% block hc %}{% endblock %}">
         <div class="container">
-            <div class="headerContent">
-                <a href="/" id="mpLink">
-                    <div id="headerTitle">
-                        <div class="row" style="height: 100%;">
-                            <div class="col-12 my-auto text-center">
-                                Дачник
-                            </div>
-                        </div>
-                    </div>
-                </a>        
+            <div class="row">
+                <div class="col-md-8">
+                    <h1><a href="/" id="logo_a">Дачник</a></h1>
+                </div>
+                <div class="col-md-4 h2 my-auto text-md-right">
+                    {% block page_title %}
+                        this will be replaced by page_title
+                    {% endblock %}
 
-                <nav class="navbar navbar-expand-lg navbar-light" style="padding-left: 0; margin-left: 0;">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link headerNavLink" href="/">Главная<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link headerNavLink" href="/products/">Товары</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link headerNavLink" href="/#contacts">Контакты</a>
-                            </li>
-                            <li class="nav-item active dropdown">
-                                <a class="nav-link headerNavLink dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Семена
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    {% block nav_seeds %}
-                                        content
-                                    {% endblock nav_seeds %}
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">О семенах</a>
-                                </div>
-                                <li class="nav-item active">
-                                    <a class="nav-link headerNavLink" href="/cart/">Корзина</a>
-                                </li>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-
-
+                </div>
             </div>
+
+            <nav class="navbar navbar-expand-lg navbar-dark" style="padding-left: 0; margin-left: 0;">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link headerNavLink" href="/">Главная<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link headerNavLink" href="/products/">Товары</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link headerNavLink" href="/#contacts">Контакты</a>
+                        </li>
+                        <li class="nav-item active dropdown">
+                            <a class="nav-link headerNavLink dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Семена
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% block nav_seeds %}
+                                    content
+                                {% endblock nav_seeds %}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">О семенах</a>
+                            </div>
+                            <li class="nav-item active">
+                                <a class="nav-link headerNavLink" href="/cart/">Корзина</a>
+                            </li>
+                        </li>
+                    </ul>
+                    <p class="text-right">т. 44-51-62</p>
+                </div>
+            </nav>
+
         </div>
-        
     </header>
 
 
@@ -95,7 +94,7 @@
 
 
 
-    <div class="container">
+
         <!-- Footer -->
     <footer class="page-footer font-small myfooter pt-4">
 
@@ -172,8 +171,6 @@
 
     </footer>
     <!-- Footer -->
-
-    </div>
 
 </body>
 </html>

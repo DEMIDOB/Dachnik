@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block page_title %}
+    {{ title }}
+{% endblock page_title %}
+
+{% block additional_styles %}
+  <link rel="stylesheet" href="{% static 'styles/product_block.css' %}">
+{% endblock additional_styles %}
+
+
+{% load getByIndex %}
+{% load calcPrice %}
+
+{% block nav_seeds %}
+    {% for pr in products.семена %}
+        <a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
+    {% endfor %}
+{% endblock nav_seeds %}
+
+{% block content %}
+    <script>
+        !window.jQuery && document.write('<script src="/static/js/jquery-1.10.2.min.js"><\/script>');
+    </script>
+    
+
+    <div class="row">
+        <div class="col-md-6">
+            <span class="contentTitle"> Категории товаров:</span>
+         </div>
+        <div class="col-md-6 my-auto">
+            <div class="contentNavigation text-left">
+                {% for cat in categories %}
+                    <a href="#" onclick="waveScrollTo($('#cat-{{cat}}').offset().top,500);" class="navLink">{{cat|capfirst}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+    </div>
+
+    {% for cat in categories %}
+        <div class="productsRow" id="cat-{{cat}}">
+            <hr>
+            <span class="contentSubtitle"> {{cat|capfirst}} </span>
+            <div class="row">
+            {% for pr in products|get_by_index:cat %}
+                
+                    <div class="col-lg-4">
+                        <div class="productDiv" onmouseover="mouseOver('desc-{{pr.article}}')" onmouseleave="mouseLeave('desc-{{pr.article}}')">
+                            <img  src="{{pr.icon}}" class="productIcon" alt="">
+                            <div class="productInfo">
+                                <b class="productName">{{pr.title}}</b>
+                                <p class="productDesc" id="desc-{{pr.article}}">{{pr.description}}</p>
+                            </div>
+                            <hr>
+                            <div class="priceBuy text-left">
+
+                                {% if pr.discount == 0 %}
+                                    <b class="productPrice">{{pr.price}} ₽</b>
+                                {% endif %}
+
+                                {% if not pr.discount == 0 %}
+                                    <div class="productPrice">
+                                        <s>{{pr.price}}</s>
+                                        <b class="productPrice">
+                                            {{pr|calc_price}} ₽
+                                            <br>
+                                            <div class="discount">
+                                                (-{{pr.discount}}%)
+                                            </div>
+                                        </b>
+                                    </div>
+                                    
+                                {% endif %}
+
+                                <a href="/cart/add/?article={{pr.article}}&amount=1" class="productBuyButton" onclick="buyButtonPressed('/products/product?article={{pr.article}}&amount=1')" data-toggle="modal" data-target=".bd-example-modal-lg">Купить</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            {% endfor %}
+            </div>
+        </div>
+
+    {% endfor %}
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="detail_view_content">
+          
+        </div>
+      </div>
+    </div>
+
+
+
+<script src={% static 'scripts/product_info.js' %}></script>
+{% endblock content %}
+

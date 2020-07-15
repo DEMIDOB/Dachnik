@@ -9,7 +9,7 @@ from .models import Order
 from cart.get import u_cart
 from cart.sets import clearCart
 
-from bot.order import sendOrderNotification
+from bot.order import sendOrderNotification, sendCancelledOrderNotification
 
 # Create your views here.
 from pages.templatetags import calcPrice
@@ -122,6 +122,8 @@ def rm_o(request, *args, **kwargs):
         unreserve(orderElement, elementAmount)
 
     targetOrder.delete()
+
+    sendCancelledOrderNotification(oid)
 
     return HttpResponse(f"Ok!")
 

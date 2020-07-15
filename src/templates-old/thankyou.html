@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+		Ваш заказ
+{% endblock title %}
+
+{% block hc %}
+	vis
+{% endblock %}
+
+{% block page_title %}
+		Ваш заказ
+{% endblock page_title %}
+
+{% block additional_styles %}
+{% endblock additional_styles %}
+
+{% block nav_seeds %}
+		{% for pr in products.семена %}
+				<a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
+		{% endfor %}
+{% endblock nav_seeds %}
+
+{% load getByIndex %}
+{% load calcPrice %}
+
+{% block content %}
+
+    	<div class="contentTitle">Ваш заказ оформлен!</div>
+    	<div class="row" style="margin-bottom: 15%;">
+    		<div class="col-md-7 my-auto">
+    			<div class="contentSubtitle">
+    				Номер заказа: №{{oid}}
+    			</div>
+    			<div class="contentSubSubTitle">
+    				Для получения товара в магазине назовите консультанту его номер.
+    			</div>
+    		</div>	
+    		<div class="col-md-5 text-center">
+    			<div class="logo_vid_container">
+					<video src="https://demidob.000webhostapp.com/dch/vids/logo-w.mp4" autoplay loop muted playsinline class="logo_vid" width="90%"></video>
+				</div>		
+    		</div>
+    		
+    	</div>
+
+{% endblock content %}

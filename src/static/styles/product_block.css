@@ -1,68 +1,108 @@
 
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
-    .productDiv{
+
+
+    .productDiv {
       font-family: Arial;
 
-      width:100%;
-      /*height: 470px;
-      max-width: 330px;*/
+      width: 100%;
+      height: 100%;
 
-      border: 8px solid #708E6E;
+      border: 6px solid #CC7654;
       padding:27px;
       padding-bottom:17px;
       text-align:center;
 
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+      background-blend-mode: luminosity;
+      background-color: rgba(255, 255, 255, .5);
+
+      border-radius: 50%;
+
       margin-top: 27px;
+      transition: 1s;
     }
 
-    .productInfo {
-      margin-top:21px;
-      margin-bottom:21px;
+    .productDiv:hover {
+      background-color: rgba(255, 255, 255, 0);
+      transition: 1s;
+    }
+
+    @media(min-width: 1200px) {
+      .productCol {
+        width: 350px;
+        height: 350px;
+      }
+    }
+
+    @media(max-width: 1199px) {
+      .productCol {
+        width: 25vw;
+        height: 25vw;
+      }
+    }
+
+    @media(max-width: 991px) {
+      .productCol {
+        width: 100%;
+        height: 70vw;
+        padding-left: 27px;
+        padding-right: 27px;
+      }
     }
 
     .productDiv b, p, b {
       margin:0;
     }
 
+    .productInfo {
+      background-color: rgba(255, 255, 255, .8);
+      border-radius: 53px;
+      padding: 10px;
+      padding-left: 25px;
+      padding-right: 25px;
+      font-family: 'mainFont';
+    }
+
+    .productTitle {
+      font-size: 35px;
+    }
 
     .productDesc {
-      margin-top:8px;
-      color:#708E6E;
-      font-size:0;
+      margin: 0;
+      font-size: 15px;
       transition: 1s;
     }
 
-    .productDescHover {
-      font-size:20px;
-      transition: 0.5s;
-    }
-
-
-    .productName {
-      color:#526858;
-      font-style:bold;
-    }
-
-    .productIcon {
-      border: 5px solid #526858;
-      width:97%;
-      max-width: 350px;
+    .productDesc:hover {
+      font-size: 20px;
+      transition: 1s;
     }
 
     .priceBuy {
       display: flex;
       justify-content: space-between;
-      margin-top:17px;
       font-size:20px;
-
+      margin-top: 17px;
     }
     .productPrice {
-      color: #526858;
+      color: #CC7654;
       font-size:20px;
     }
 
-    .discount {
-      color:#9F2C2C;
+    .buyButton, .discount {
+      color: #A15030;
+      border-bottom: 2px solid rgba(255, 255, 255, 0);
+      transition: 1s;
+    }
+
+    .buyButton:hover {
+      text-decoration: none;
+      color: #A15030;
+      border-bottom: 2px solid #A15030;
+      transition: 1s;
     }
 
     .productBuyButton {

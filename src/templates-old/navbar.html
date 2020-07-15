@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="padding-left: 0; margin-left: 0;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Главная<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Товары</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Контакты</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Семена
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% block nav_seeds %}
+                        content
+                    {% endblock nav_seeds %}
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">О семенах</a>
+                </div>
+            </li>
+        </ul>
+        <p>т. 44-51-62</p>
+    </div>
+</nav>
