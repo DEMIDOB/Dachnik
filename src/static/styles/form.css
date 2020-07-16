@@ -1,8 +1,16 @@
 
 .dForm {
-	border: 8px solid #708E6E;
-	padding:3vw;
+	border: 6px solid #CC7654;
+	border-radius: 53px;
+	padding: 2.5vw;
 }
+
+@media (max-width: 1000px) {
+	.dForm {
+		padding: 20px;
+	}
+}
+
 .dFormContent {
 	display:flex;
 	justify-content: space-between;
