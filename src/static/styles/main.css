@@ -227,6 +227,7 @@ header {
 
 .block_border {
     border: 6px solid #CC7654;
+    border-radius: 53px;
 }
 .toMainLink:hover {
     color:#708E6E;
