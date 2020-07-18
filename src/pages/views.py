@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from products.models import Product
 
@@ -81,3 +81,7 @@ def homepage_view(request, *agrs, **kwargs):
 
 def page404_view(request, *args, **kwargs):
     return render(request, "404.html")
+
+def favicon_view(request, *args, **kwargs):
+    print("xuixuixuiuxiuxi")
+    return HttpResponseRedirect("/static/imgs/favicon.ico")
