@@ -9,7 +9,7 @@ from .models import Order
 from cart.get import u_cart
 from cart.sets import clearCart
 
-from bot.order import sendOrderNotification, sendCancelledOrderNotification
+from bot.order import sendOrderNotification, sendCancelledOrderNotification, sendRecievedOrderNotification
 
 # Create your views here.
 from pages.templatetags import calcPrice
@@ -78,7 +78,7 @@ def complete_order(request, *args, **kwargs):
 
     print(f"{request.get_host()}/remove_order?oid={OrderObject.id}")
 
-    sendOrderNotification(name, cartData, OrderObject.id, phone, email, comment, f"{request.get_host()}/remove_order?oid={OrderObject.id}")
+    sendOrderNotification(name, cartData, OrderObject.id, phone, email, comment, f"{request.get_host()}/remove_order?oid={OrderObject.id}", f"{request.get_host()}/recieve_order?oid={OrderObject.id}")
 
     return HttpResponseRedirect(f'/thankyou/?oid={OrderObject.id}')
 
@@ -131,3 +131,56 @@ def rm_o(request, *args, **kwargs):
 def thankyou_view(request, *args, **kwargs):
     return render(request, 'thankyou.html', {'oid': request.GET['oid']})
 
+def recieve_order_view(request, *args, **kwargs):
+    queryDict = request.GET
+
+    if not request.method == "GET":
+        return HttpResponse(f"Wrong request method '{request.method}'! Expected 'GET'")
+
+    try:
+        oid = queryDict['oid']
+    except:
+        return HttpResponse(f"Not enough arguments!")
+
+    myContext = {
+        'oid': f"{oid}"
+    }
+
+    return render(request, 'recieve_order.html', myContext)
+
+def rec_o(request, *args, **kwargs):
+    queryDict = request.GET
+
+    if not request.method == "GET":
+        return HttpResponse(f"Wrong request method '{request.method}'! Expected 'GET'")
+
+    try:
+        oid = queryDict['oid']
+    except:
+        return HttpResponse(f"Not enough arguments!")
+
+    try:
+        targetOrder = Order.objects.get(id=oid)
+    except:
+        return HttpResponse(f"There is no such order!")
+
+    orderData = json.loads(targetOrder.json)
+
+    for orderElement in orderData:
+        try:
+            targetProduct = Product.objects.get(article=orderElement)
+        except:
+            return HttpResponse(f"There is no product with such article: {orderElement}!")
+        elementAmount = orderData[orderElement]
+        newAmount = targetProduct.amount - elementAmount
+        if newAmount < 0:
+            return HttpResponse(f"There are not so ({elementAmount}) many products!")
+        unreserve(orderElement, elementAmount)
+        targetProduct.amount = newAmount
+        targetProduct.save()
+
+    targetOrder.delete()
+
+    sendRecievedOrderNotification(oid)
+
+    return HttpResponse("Ok!")

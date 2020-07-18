@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+		Отмена заказа
+{% endblock title %}
+
+{% block hc %}
+	vis
+{% endblock %}
+
+{% block page_title %}
+		Отмена заказа
+{% endblock page_title %}
+
+{% block additional_styles %}
+{% endblock additional_styles %}
+
+{% block nav_seeds %}
+		{% for pr in products.семена %}
+				<a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
+		{% endfor %}
+{% endblock nav_seeds %}
+
+{% load getByIndex %}
+{% load calcPrice %}
+
+{% block content %}
+	<div class="contentTitle">Вы действительно хотите выкупить заказ №{{oid}}?</div>
+    	<div class="row">
+		<div class="col-md-7 my-auto">
+			<a href="/rec_o?oid={{oid}}" class="contentSubtitle toMainLink">
+				Да, выкупить
+			</a>
+			<div class="contentSubSubTitle">
+				Если не хотите, то просто закройте страницу.
+			</div>
+		</div>	
+		<div class="col-md-5 text-center">
+			<div class="logo_vid_container">
+				<video src="https://demidob.000webhostapp.com/dch/vids/logo-w.mp4" autoplay loop muted playsinline class="logo_vid" width="90%"></video>
+			</div>		
+		</div>
+		
+	</div>
+{% endblock content %}

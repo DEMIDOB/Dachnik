@@ -5,9 +5,11 @@ except:
     system("pip install requests")
     import requests
 
+from .methods import *
+
 from products.models import Product
 
-def sendOrderNotification(name, cartData, oid, phone, email, comment, removeLink):
+def sendOrderNotification(name, cartData, oid, phone, email, comment, removeLink, recieveLink):
     productsOrder = ""
 
     counter = 1
@@ -28,11 +30,14 @@ def sendOrderNotification(name, cartData, oid, phone, email, comment, removeLink
 *E-Mail:* {email}\n
 *Комментарий к заказу:*
 {comment}\n
-[Отменить заказ]({removeLink})
+[Отменить заказ]({removeLink}) | [Выкупить заказ]({recieveLink})
     """
-    requests.get(f"https://api.telegram.org/bot1225466990:AAHeSxZ66mt1sOD_0ojhUf4EpbxoVK06TAY/sendMessage?chat_id=@dchadm&parse_mode=markdown&text={msg}")
+    sendMsg(msg)
 
 def sendCancelledOrderNotification(oid):
     msg = f"*Отмена заказа №{oid}*"
-    requests.get(f"https://api.telegram.org/bot1225466990:AAHeSxZ66mt1sOD_0ojhUf4EpbxoVK06TAY/sendMessage?chat_id=@dchadm&parse_mode=markdown&text={msg}")
+    sendMsg(msg)
 
+def sendRecievedOrderNotification(oid):
+    msg = f"Заказ *№{oid} выкуплен*"
+    sendMsg(msg)
