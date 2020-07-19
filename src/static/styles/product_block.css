@@ -30,6 +30,11 @@
       transition: 1s;
     }
 
+    .productCol {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     @media(min-width: 1200px) {
       .productCol {
         width: 350px;
@@ -46,10 +51,8 @@
 
     @media(max-width: 991px) {
       .productCol {
-        width: 100%;
-        height: 70vw;
-        padding-left: 27px;
-        padding-right: 27px;
+        width: 350px;
+        height: 350px;
       }
     }
 
