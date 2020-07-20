@@ -51,3 +51,21 @@ def getProductsCatrows():
         prows[category].append(product)
 
     return prows, cats
+
+def formReprData(cartData, telegramMarkdown = True):
+    productsOrder = ""
+
+    counter = 1
+
+    for cartElement in cartData:
+        try:
+            productElement = Product.objects.get(article=cartElement)
+            if telegramMarkdown:
+                productsOrder += f"*{counter}. {str(productElement.title).capitalize()}* — {cartData[cartElement]} шт. (Артикул: *{cartElement}*)\n"
+            else:
+                productsOrder += f"{counter}. {str(productElement.title).capitalize()} — {cartData[cartElement]} шт. (Артикул: {cartElement})\n"
+            counter += 1
+        except:
+            continue
+
+    return productsOrder
