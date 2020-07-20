@@ -10,6 +10,7 @@ from cart.get import u_cart
 from cart.sets import clearCart
 
 from bot.order import sendOrderNotification, sendCancelledOrderNotification, sendRecievedOrderNotification
+from mail.order_mail import *
 
 # Create your views here.
 from pages.templatetags import calcPrice
@@ -64,7 +65,7 @@ def complete_order(request, *args, **kwargs):
         print("No comment! =)")
 
     # Create OrderObject:
-    OrderObject = Order(json=cartJSON)
+    OrderObject = Order(json=cartJSON, name=name, email=email)
 
     # Clear the user's cart:
     try:
@@ -79,6 +80,7 @@ def complete_order(request, *args, **kwargs):
     print(f"{request.get_host()}/remove_order?oid={OrderObject.id}")
 
     sendOrderNotification(name, cartData, OrderObject.id, phone, email, comment, f"{request.get_host()}/remove_order?oid={OrderObject.id}", f"{request.get_host()}/recieve_order?oid={OrderObject.id}")
+    sendThanksForOrderEmail(OrderObject)
 
     return HttpResponseRedirect(f'/thankyou/?oid={OrderObject.id}')
 
@@ -124,6 +126,7 @@ def rm_o(request, *args, **kwargs):
     targetOrder.delete()
 
     sendCancelledOrderNotification(oid)
+    sendCancelledOrderEmail(targetOrder, oid)
 
     return HttpResponse(f"Ok!")
 
@@ -182,5 +185,6 @@ def rec_o(request, *args, **kwargs):
     targetOrder.delete()
 
     sendRecievedOrderNotification(oid)
+    sendRecievedOrderEmail(targetOrder, oid)
 
     return HttpResponse("Ok!")
