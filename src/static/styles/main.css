@@ -126,7 +126,7 @@ header {
 /*FOOTER*/
 .myfooter {
     /*background-image: linear-gradient(45deg, #5A6F5A 0%, #8CA894 50%);*/
-    background-image: url('http://localhost/dch/h/Header-no-c.svg');
+    background-image: url('https://demidob.000webhostapp.com/dch/h/Header.png');
     background-position: center top;
     /*background-size: 90%;*/
     background-repeat: no-repeat;
@@ -224,7 +224,8 @@ header {
 .block_content {
     margin-top: 27px;
 }
-
+.block_just_border {
+}
 .block_border {
     border: 6px solid #CC7654;
     border-radius: 53px;
