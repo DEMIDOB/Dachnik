@@ -8,6 +8,7 @@ safe_data.py
 **/__pycache__
 **/db.sqlite3
 **/vk_config.v2.json
+**/migrations
 .idea
 Include
 Lib
