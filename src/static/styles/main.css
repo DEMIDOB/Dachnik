@@ -170,7 +170,7 @@ header {
 
 .contentSubtitle {
     font-size: 35px;
-    font-weight:bold;
+    font-weight:normal;
     /*color: #7CA0D3;*/
     color: #CC7654;
 }

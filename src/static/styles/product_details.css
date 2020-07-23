@@ -2,6 +2,12 @@
     margin: 50px;
 }
 
+@media(max-width: 1000px) {
+    .product_details_content {
+        margin: 15px;
+    }
+}
+
 .stepper {
    display: inline-block;
    vertical-align: top;
@@ -21,7 +27,7 @@
  .productIcon {
     border-radius: 50%;
     border: 6px solid #CC7654;
-    width:100%;
+    width: 261px;
 }
 
 .discount {

@@ -21,11 +21,7 @@
 	<link rel="stylesheet" href="{% static 'styles/own_carousel.css' %}">
 {% endblock additional_styles %}
 
-{% block nav_seeds %}
-		{% for pr in products.семена %}
-				<a class="dropdown-item" href="/products/product?article={{ pr.article }}">{{pr.title}}</a>
-		{% endfor %}
-{% endblock nav_seeds %}
+
 
 {% load calcPrice %}
 
@@ -36,6 +32,7 @@
 					<div class="contentTitle absolute_me" id="center_me">Добро пожаловать{{name|safe}}</div>
 					<div id="discAnouncement" class="invis contentSubSubTitle">
 						На данные категории товаров сейчас действуют скидки:
+
 						<div class="contentNavigation text-left">
 			                {% for cat in catsWithDisct %}
 			                    <a href="products/#cat-{{cat}}" class="navLink">{{cat|capfirst}}</a>
