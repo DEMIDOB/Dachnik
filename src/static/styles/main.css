@@ -248,3 +248,18 @@ header {
 .toMainLink:hover {
     color:#708E6E;
 }
+.btn {
+    background-image: url('/static/imgs/bg1.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1300%;
+    transition: .8s;
+    color: white;
+}
+
+.btn:hover {
+    background-position: center;
+    background-size: 200%;   
+    transition: .8s;
+    color: white;
+}

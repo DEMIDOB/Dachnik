@@ -68,11 +68,11 @@
 
 					<div class="bottom ">			
 						<div class=" stepper">
-							<button class="btn btn-secondary" onclick='BtnOncl(this, "count1", {{pr.amount}})'>-</button>
+							<button class="btn" onclick='BtnOncl(this, "count1", {{pr.amount}})'>-</button>
 							<span id="count1">1</span>
-							<button class="btn btn-secondary" onclick='BtnOncl(this, "count1", {{pr.amount}})'>+</button>
+							<button class="btn" onclick='BtnOncl(this, "count1", {{pr.amount}})'>+</button>
 						</div>
-							<button class="btn btn-success" onclick="addToCart({{pr.article}})" data-toggle="modal" data-target="#cartSuccessModal">В корзину</button>
+							<button class="btn" onclick="addToCart({{pr.article}})" data-toggle="modal" data-target="#cartSuccessModal">В корзину</button>
 					</div>
 				</div>
 			</div>
@@ -92,8 +92,8 @@
 	        <span id="modalAmount"></span>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-	        <a href="/cart/" class="btn btn-success">Перейти в корзину</a>
+	        <button type="button" class="btn" data-dismiss="modal">Закрыть</button>
+	        <a href="/cart/" class="btn">Перейти в корзину</a>
 	      </div>
 	    </div>
 	  </div>
