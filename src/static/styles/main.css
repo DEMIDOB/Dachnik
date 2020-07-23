@@ -97,9 +97,10 @@ header {
     opacity: 0.6;
     font-size: 25px;
 
-    padding: 10px;
+    padding-bottom: 1px;
+    /*padding: 10px;*/
 
-    border-bottom: 1px rgba(0, 0, 0, 0) solid;
+    border-bottom: 2px rgba(0, 0, 0, 0) solid;
     transition:0.5s;
 
 }
@@ -107,7 +108,7 @@ header {
     text-decoration: none;
 
     color: rgba(0, 0, 0, .6);
-    border-bottom: 1px white solid;
+    border-bottom: 2px rgba(0, 0, 0, .6) solid;
     transition:0.5s;
 }
 
@@ -125,17 +126,31 @@ header {
 
 /*FOOTER*/
 .myfooter {
+    font-family: 'mainFont';
     /*background-image: linear-gradient(45deg, #5A6F5A 0%, #8CA894 50%);*/
-    background-image: url('https://demidob.000webhostapp.com/dch/h/Header.png');
-    background-position: center top;
+    /*background-image: url('https://demidob.000webhostapp.com/dch/h/Header.png');*/
+    
+    background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 53px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+    /*background-position: center top;*/
     /*background-size: 90%;*/
     background-repeat: no-repeat;
-    margin-top: 27px;
-    color: white;
+    margin-top: 73px; /* 27 */
+    color: #CC7654;
+    transition: 0.5s;
+}
+
+.myfooter:hover {
+    margin-top: 50px;
+    margin-bottom: 23px;
+    transition: 0.5s;
 }
 
 .myfooter a {
-    color: white;
+    color: #CC7654;
 }
 
 /*CUSTOM STYLES*/
@@ -174,13 +189,13 @@ header {
     font-size:25px;
     margin-right: 33px;
     
-    border-bottom: 1px #707070 solid;
+    border-bottom: 1px rgb(103, 116, 104) solid;
     transition:  0.2s;
 }
 .navLink:hover{
     color: rgb(103, 116, 104);
 
-    border-bottom: 2px #707070 solid;
+    border-bottom: 2px rgb(103, 116, 104) solid;
     transition:  0.2s;
     text-decoration: none;
 }
@@ -218,7 +233,7 @@ header {
 
 
 .page_block {
-    margin-top: 108px;
+    margin-top: 178px; /* 108px */
 }
 
 .block_content {
