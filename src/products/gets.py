@@ -2,6 +2,7 @@ from .models import Product
 
 from decimal import Decimal
 from reserve.get import *
+from pages.templatetags.calcPrice import calc_final_price
 
 def getAvailableProducts():
     allProducts = Product.objects.all()
@@ -56,6 +57,7 @@ def formReprData(cartData, telegramMarkdown = True):
     productsOrder = ""
 
     counter = 1
+    totalPrice = 0
 
     for cartElement in cartData:
         try:
@@ -64,8 +66,16 @@ def formReprData(cartData, telegramMarkdown = True):
                 productsOrder += f"*{counter}. {str(productElement.title).capitalize()}* — {cartData[cartElement]} шт. (Артикул: *{cartElement}*)\n"
             else:
                 productsOrder += f"{counter}. {str(productElement.title).capitalize()} — {cartData[cartElement]} шт. (Артикул: {cartElement})\n"
+
+            totalPrice += calc_final_price(productElement, cartData)
+
             counter += 1
         except:
             continue
+
+    if telegramMarkdown:
+        productsOrder += f"\nИтого: *{totalPrice} ₽*\n"
+    else:
+        productsOrder += f"\nИтого: {totalPrice} ₽\n"
 
     return productsOrder

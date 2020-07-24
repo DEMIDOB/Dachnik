@@ -7,6 +7,18 @@ body {
     font-family: 'mainFont';
 }
 
+a {
+    font-size: 20px;
+    color: #7CA0D3;
+    transition: 0.5s;
+}
+
+a:hover {
+    color: #5072a1;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
 @media(max-width: 999px) {
     body {
         padding: 0;

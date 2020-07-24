@@ -31,10 +31,19 @@
 	</div>
 
     {% if cartProducts|length == 0 %}
-        <div class="text-left" style="margin-top:27px;">
-            <div class="contentSubtitle">Ваша корзина пуста.</div>
-            <div>
-                <a href="/products/">Сделать заказы</a>
+        <div class="row" style="margin-bottom: 15%;">
+            <div class="col-md-7 my-auto">
+                <div class="contentSubtitle">
+                    Ваша корзина пуста.
+                </div>
+                <div class="contentSubSubTitle">
+                    <a href="/products/">Начать покупки</a>
+                </div>
+            </div>  
+            <div class="col-md-5 text-center">
+                <div class="logo_vid_container">
+                    <video src="https://demidob.000webhostapp.com/dch/vids/logo-w.mp4" autoplay loop muted playsinline class="logo_vid" width="90%"></video>
+                </div>      
             </div>
         </div>
     {% endif %}

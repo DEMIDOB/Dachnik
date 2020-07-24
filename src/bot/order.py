@@ -8,19 +8,10 @@ except:
 from .methods import *
 
 from products.models import Product
+from products.gets import formReprData
 
 def sendOrderNotification(name, cartData, oid, phone, email, comment, removeLink, recieveLink):
-    productsOrder = ""
-
-    counter = 1
-
-    for cartElement in cartData:
-        try:
-            productElement = Product.objects.get(article=cartElement)
-            productsOrder += f"*{counter}. {str(productElement.title).capitalize()}* — {cartData[cartElement]} шт. (Артикул: *{cartElement}*)\n"
-            counter += 1
-        except:
-            continue
+    productsOrder = formReprData(cartData, telegramMarkdown=True)
 
     msg = f"""
         *Новый заказ №{oid} \n
