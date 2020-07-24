@@ -8,13 +8,13 @@ body {
 }
 
 a {
-    font-size: 20px;
-    color: #7CA0D3;
+    font-size: inherit;
+    color: inherit;
+    font-weight: inherit;
     transition: 0.5s;
 }
 
 a:hover {
-    color: #5072a1;
     text-decoration: none;
     transition: 0.5s;
 }
@@ -245,13 +245,14 @@ header {
 
 
 .page_block {
-    margin-top: 178px; /* 108px */
+    margin-top: 158px; /* 108px */ /* 178 */
 }
 
 .block_content {
     margin-top: 27px;
 }
 .block_just_border {
+    border: 6px solid #CC7654;
 }
 .block_border {
     border: 6px solid #CC7654;
@@ -273,6 +274,10 @@ header {
     background-position: center;
     background-size: 200%;   
     transition: .8s;
+    color: white;
+}
+
+.btn a:hover {
     color: white;
 }
 

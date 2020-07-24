@@ -169,13 +169,38 @@
 			</div>
 	</div>
 					
+	<div class="page_block dForm text-left"> {# INVIS!!! #}
+		<div class="contentSubtitle font-weight-bold" style="margin-bottom: 27px;">
+			Наш ассортимент:
+		</div>
+		<div class="text-center">
+			<div class="categoriesPromos row">
+				{% for category in products %}
+					<div class="col-lg-2 col-md-3 col-6 text-center">
+						<a href="/products/#cat-{{category}}">
+							<div class="categoryPromo row">
+								<div class="col-12 text-center my-auto">
+									<div>
+										{{category|capfirst}}
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="contentSubSubTitle text-center btn" style="display: inline-block;">
+				<a href="/products/">Начать покупки</a>
+			</div>
+		</div>
+	</div>
 	
 
 	<div class="page_block" id="contacts">
 		<div class="row">
 			<div class="col-md-7">
 				<div class="dForm">		
-					<div class="text-center"><div class="contentSubtitle" style="border-bottom: 1px #707070 solid; display: inline-block; margin-bottom:26px;">Контакты</div></div>
+					<div class="text-center"><div class="contentSubtitle font-weight-bold" style="border-bottom: 1px #707070 solid; display: inline-block; margin-bottom:26px;">Контакты</div></div>
 
 					<form action="" method="post" content="text/html; charset=UTF-8" accept-charset="UTF-8">
 		   				<div style="position:relative;overflow:hidden;border-radius: 23px;font-family: 'mainFont';"><a href="https://yandex.ru/maps/org/dachnik/1015190402/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Дачник</a><a href="https://yandex.ru/maps/192/vladimir/category/gardening_shop/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Магазин для садоводов во Владимире</a><a href="https://yandex.ru/maps/192/vladimir/category/seed_store/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Магазин семян во Владимире</a><iframe src="https://yandex.ru/map-widget/v1/-/CCQdn0eZKD" width="100%" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
@@ -194,7 +219,7 @@
 	<div class="page_block">
 		<div class="row">
 			<div class="col-md-5">
-				<div class="contentSubtitle">
+				<div class="contentSubtitle font-weight-bold">
 					Обратная связь
 				</div>
 				<div class="contentSubSubTitle">
@@ -203,7 +228,7 @@
 			</div>
 			<div class="col-md-7">	
 				<div class="dForm">		
-					<div class="text-center"><div class="contentSubtitle" style="border-bottom: 1px #707070 solid; display: inline-block; margin-bottom:26px;">Напишите нам</div></div>
+					<div class="text-center"><div class="contentSubtitle font-weight-bold" style="border-bottom: 1px #707070 solid; display: inline-block; margin-bottom:26px;">Напишите нам</div></div>
 
 					<form action="/pf/" method="post" content="text/html; charset=UTF-8" accept-charset="UTF-8">
 		   				{% csrf_token %}
