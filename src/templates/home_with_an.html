@@ -7,7 +7,7 @@
 {% endblock title %}
 
 {% block hc %}
-	
+	invis
 {% endblock %}
 
 {% block page_title %}
@@ -28,9 +28,9 @@
 {% block content %}
 	
 	<div class="row">
-			<div class="col-md-7">
-					<div class="contentTitle" id="center_me">Добро пожаловать{{name|safe}}</div>
-					<div id="discAnouncement" class=" contentSubSubTitle">
+			<div class="futureColMd7">
+					<div class="contentTitle absolute_me" id="center_me">Добро пожаловать{{name|safe}}</div>
+					<div id="discAnouncement" class="invis contentSubSubTitle">
 						На данные категории товаров сейчас действуют скидки:
 
 						<div class="contentNavigation text-left">
@@ -47,7 +47,7 @@
 
 			</div>
 
-			<div class="col-md-5 ">
+			<div class="futureColMd5 invis">
 			
 				
 				<div class="" >
@@ -169,7 +169,7 @@
 			</div>
 	</div>
 					
-	<div class="page_block dForm text-left"> {# !!! #}
+	<div class="page_block dForm text-left"> {# INVIS!!! #}
 		<div class="contentSubtitle font-weight-bold" style="margin-bottom: 27px;">
 			Наш ассортимент:
 		</div>
@@ -251,6 +251,6 @@
       </div>
     </div>
 
-{# <script src={% static "scripts/main_page_intro.js" %}></script> #}
+<script src={% static "scripts/main_page_intro.js" %}></script>
 <script src={% static 'scripts/product_info.js' %}></script>
 {% endblock content %}
