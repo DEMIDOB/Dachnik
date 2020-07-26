@@ -82,6 +82,29 @@ body {
     font-size: 20px;
     transition: 1s;
 }
+    
+
+    /*@media(max-width: 1199px) {
+    	.categoryPromo {
+			width: 100px;
+			height: 100px;
+			background-size: 100px;
+		}
+    }
+
+    @media(max-width: 767px) {
+    	.categoryPromo {
+			width: 150px;
+			height: 150px;
+		}
+    }
+
+    @media(min-width: 1200px) {
+    	.categoryPromo {
+			width: 150px;
+			height: 150px;
+		}
+    }*/
 
 .categoryPromo:hover {
 	transform: rotate(-15deg);
