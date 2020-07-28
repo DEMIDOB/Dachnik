@@ -13,3 +13,6 @@ def sendMail(subject: str, body: str, to: str):
     server.auth_plain()
     server.sendmail("Dachnik", to, message.encode('utf-8'))
     server.quit()
+
+if __name__ == "__main__":
+    sendMail("Test subject", "Test body", "dania.demidov@yandex.ru")
