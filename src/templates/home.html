@@ -30,12 +30,12 @@
 	<div class="row">
 			<div class="col-md-7">
 					<div class="contentTitle" id="center_me">Добро пожаловать{{name|safe}}</div>
-					<div id="discAnouncement" class=" contentSubSubTitle">
-						На данные категории товаров сейчас действуют скидки:
+					<div id="discAnouncement" class="contentSubtitle">
+						Наши скидки:
 
 						<div class="contentNavigation text-left">
 			                {% for cat in catsWithDisct %}
-			                    <a href="products/#cat-{{cat}}" class="navLink">{{cat|capfirst}}</a>
+			                    <a href="products/#cat-{{cat}}" class=btn>{{cat|capfirst}}</a>
 			                {% endfor %}
 			            </div>
 						
@@ -176,7 +176,7 @@
 		<div class="text-center">
 			<div class="categoriesPromos row">
 				{% for category in products %}
-					<div class="col-lg-2 col-md-4 col-6 text-center">
+					<div class="col-lg-2 col-md-3 col-6 text-center">
 						<a href="/products/#cat-{{category}}">
 							<div class="categoryPromo row">
 								<div class="col-12 text-center my-auto">
