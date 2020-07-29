@@ -45,7 +45,7 @@
     <header class="{% block hc %}{% endblock %}">
         <div class="container">
             <div class="headerContent">
-                <a href="/" id="mpLink">
+                <a {% block mp_link %} href="/" {% endblock mp_link %} id="mpLink">
                     <div id="headerTitle">
                         <div class="row" style="height: 100%;">
                             <div class="col-12 my-auto text-center">

@@ -36,9 +36,13 @@
          </div>
         <div class="col-md-6 my-auto">
             <div class="contentNavigation text-left">
-                {% for cat in categories %}
-                    <a href="#" onclick="waveScrollTo($('#cat-{{cat}}').offset().top,500);" class="navLink">{{cat|capfirst}}</a>
-                {% endfor %}
+                <div class="row">
+                    {% for cat in categories %}
+                        <div class="col-md-4 col-6 text-left">
+                            <a href="#" onclick="waveScrollTo($('#cat-{{cat}}').offset().top,500);" class="btn navBtn">{{cat|capfirst}}</a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
