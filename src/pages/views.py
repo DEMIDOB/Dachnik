@@ -33,6 +33,8 @@ import pickle
 
 
 def homepage_view(request, *agrs, **kwargs):
+    if request.get_host() == "http://дачник33.site/" or request.get_host() == "http://xn--33-6kcpvmt3f.site/":
+        return HttpResponseRedirect('http://dachnik33.site/')
     syncPosts()
     request.session['initialized'] = True
     # thisCart = u_cart(request)
