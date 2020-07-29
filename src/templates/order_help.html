@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+		Помощь — оформление заказа
+{% endblock title %}
+
+{% block hc %}
+	vis
+{% endblock %}
+
+{% block page_title %}
+		Помощь — оформление заказа
+{% endblock page_title %}
+
+{% block additional_styles %}
+	<link rel="stylesheet" href="{% static 'styles/form.css' %}">
+	<link rel="stylesheet" href="{% static 'styles/help_page.css' %}">
+{% endblock additional_styles %}
+
+{% load getByIndex %}
+{% load calcPrice %}
+
+{% block content %}
+	<div class="contentTitle">Что будет при оформлении заказа?</div>
+    <div class="row">
+		<div class="col-md-7 my-auto">
+			<ul>
+				<div class="helpPageElement dForm">
+					<li>
+						<div class="contentSubtitle">
+							С меня сразу спишут деньги?
+						</div>
+						<div class="contentSubSubTitle">
+							Нет! Оформление заказа на сайте не требует оплаты его онлайн и работает по принципу резервирования.
+						</div>
+					</li>
+				</div>
+				<div class="helpPageElement dForm">
+					<li>
+						<div class="contentSubtitle">
+							Что мне делать после оформления?
+						</div>
+						<div class="contentSubSubTitle">
+							На указанную почту Вам придёт письмо с информацией о заказе и о том, как и где его можно будет получить.
+						</div>
+					</li>
+				</div>
+				<div class="helpPageElement dForm">
+					<li>
+						<div class="contentSubtitle">
+							Я точно смогу получить все отложенные товары?
+						</div>
+						<div class="contentSubSubTitle">
+							Консультанты сразу получат уведомление о поступлении заказа и отложат необходимые товары, чтобы вы могли прийти и забрать их когда Вам удобно в течение недели (?).
+						</div>
+					</li>
+				</div>
+			</ul>
+			<div class="text-right">
+				<a href="/order/" class="btn">Продолжить оформление заказа</a>
+			</div>
+		</div>	
+		<div class="col-md-5 text-center">
+			<div class="logo_vid_container">
+				<video src="https://demidob.000webhostapp.com/dch/vids/logo-w.mp4" autoplay loop muted playsinline class="logo_vid" width="90%"></video>
+			</div>		
+		</div>
+		
+	</div>
+{% endblock content %}

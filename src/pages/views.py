@@ -85,5 +85,7 @@ def page404_view(request, *args, **kwargs):
     return render(request, "404.html")
 
 def favicon_view(request, *args, **kwargs):
-    print("xuixuixuiuxiuxi")
     return HttpResponseRedirect("/static/imgs/favicon.ico")
+
+def order_help_view(request):
+    return render(request, "order_help.html")

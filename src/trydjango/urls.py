@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from pages.views import homepage_view, page404_view, favicon_view
+from pages.views import homepage_view, page404_view, favicon_view, order_help_view
 from products.views import products_view, product_detail_view
 from feedback.views import process_feedback_view
 from cart.views import user_cart_view, add_to_cart_view, remove_from_cart
@@ -38,5 +38,6 @@ urlpatterns = [
     path('rm_o', rm_o),
     path('favicon.ico/', favicon_view),
     path('recieve_order/', recieve_order_view),
-    path('rec_o/', rec_o)
+    path('rec_o/', rec_o),
+    path('help/order/', order_help_view)
 ]
