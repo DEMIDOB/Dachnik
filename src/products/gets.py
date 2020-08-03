@@ -4,7 +4,7 @@ from .models import Product
 
 from decimal import Decimal
 from reserve.get import *
-from pages.templatetags.calcPrice import calc_final_price
+from pages.templatetags.calcPrice import calc_final_price, calc_price
 
 def getAvailableProducts():
     allProducts = Product.objects.all()
@@ -88,6 +88,7 @@ def repr_product_dct(product):
         'description': str(product.description),
         'category': str(product.category),
         'price': str(product.price),
+        'finalPrice': str(calc_price(product)),
         'discount': str(product.discount),
         'producer': str(product.producer),
         'icon': str(product.icon),
