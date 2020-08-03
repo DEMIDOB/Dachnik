@@ -42,12 +42,15 @@ def product_detail_view(request, *args, **kwargs):
 
     myContext = {
         "title": f"Купить {requestedObject.title}",
-        "pr": requestedObject
+        "pr": repr_product_dct(requestedObject)
     }
 
     # requests.get(f"https://api.telegram.org/bot1225466990:AAHeSxZ66mt1sOD_0ojhUf4EpbxoVK06TAY/sendMessage?chat_id=@dchadm&text=Кто-то%20заказал:%20{requestedObject.title}")
 
-    return render(request, "product_details.html", myContext)
+    responseStr = json.dumps(myContext, ensure_ascii=False)
+
+    # return render(request, "product_details.html", myContext)
+    return HttpResponse(responseStr)
 
 def add_to_cart(request, *args, **kwargs):
     thisCart = u_cart(request)
