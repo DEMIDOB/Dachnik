@@ -72,6 +72,7 @@ def homepage_view(request, *agrs, **kwargs):
     myContext = {
         "title": "Главная",
         "categories": categories,
+        "catsWithDisct": catsWithDisct,
         "discProducts": withDiscount,
         "betterDisc": betterDisc[1], # it is already serialized
         "name": name
