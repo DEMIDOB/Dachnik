@@ -2,3 +2,4 @@ Django
 requests
 vk_api
 django-phone-field
+django-cors-headers
