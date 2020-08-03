@@ -1,3 +1,5 @@
+import json
+
 from .models import Product
 
 from decimal import Decimal
@@ -79,3 +81,31 @@ def formReprData(cartData, telegramMarkdown = True):
         productsOrder += f"\nИтого: {totalPrice} ₽\n"
 
     return productsOrder
+
+def repr_product_dct(product):
+    data = {
+        'title': str(product.title),
+        'description': str(product.description),
+        'category': str(product.category),
+        'price': str(product.price),
+        'discount': str(product.discount),
+        'producer': str(product.producer),
+        'icon': str(product.icon),
+        'article': str(product.article),
+        'amount': product.amount,
+        'isAvailable': product.isAvailable
+    }
+    return data
+
+def repr_producstCatrows():
+    prows, categories = getProductsCatrows()
+
+    data = {}
+
+    for category in categories:
+        productsInCategory = prows[category]
+        data[category] = []
+        for product in productsInCategory:
+            data[category].append(repr_product_dct(product))
+
+    return data, categories
