@@ -1,8 +1,8 @@
 from .models import Cart
 
 def u_cart(request):
+    # TODO: if there is no _session_key, just return -1 and then check if -1 returned
     uid = request.session._session_key
-    print(request.session._session_key)
 
     thisCart = Cart.objects.filter(id=uid)
     

@@ -31,8 +31,9 @@ def products_view(request, *args, **kwargs):
 
 
 def product_detail_view(request, *args, **kwargs):
+    thisCart = u_cart(request)
     queryDict = request.GET
-    requestedArticle = int(queryDict['article'])
+    requestedArticle = int(request.GET['article'])
     requestedObject = Product.objects.get(article=requestedArticle)
     requestedObject.amount -= getReservation(requestedArticle)
 

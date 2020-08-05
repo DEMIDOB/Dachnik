@@ -2,7 +2,7 @@
 
 import json
 
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 from  django.core import serializers
 from products.models import Product
@@ -42,6 +42,8 @@ def homepage_view(request, *agrs, **kwargs):
         return HttpResponseRedirect('http://dachnik33.site/')
     syncPosts()
     request.session['initialized'] = True
+    print("Fuck", request.session['initialized'])
+    request.COOKIES['asdasd'] = 'asdasd'
     # thisCart = u_cart(request)
 
     productsRows, categories = getProductsCatrows()
@@ -67,7 +69,7 @@ def homepage_view(request, *agrs, **kwargs):
     # Removing object with the best discount from the 'withDiscount' list:
     withDiscount.remove(withDiscount[betterDisc[2]])
     
-    name = request.session.get('name', "!")
+    name = request.session.get('name', "-1")
 
     myContext = {
         "title": "Главная",
@@ -80,6 +82,8 @@ def homepage_view(request, *agrs, **kwargs):
 
     response_str = json.dumps(myContext, ensure_ascii=False)
     response = HttpResponse(response_str)
+    response.set_cookie('asd', 'asdasd')
+    response["Access-Control-Allow-Origin"] = "*"
 
     return response
 

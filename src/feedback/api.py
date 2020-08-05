@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import *
 from bot.fb import send_fb
@@ -7,19 +7,24 @@ from bot.fb import send_fb
 import pickle
 
 # Create your views here.
+@csrf_exempt
 def process_feedback_view(request, *args, **kwargs):
-	if request.method == "POST":
-		form = FeedbackForm(request.POST)
-		if form.is_valid():
-			response = HttpResponseRedirect("/")
-			
-			name = request.POST['name']
-			topic = request.POST['topic']
-			body = request.POST['body']
-			email = request.POST['email']
+	if request.method == "GET":
+		form = FeedbackForm(request.GET)
+		print(request.GET)
+		if True:
+			response = HttpResponse("0")
+
+			name = request.GET['name']
+			topic = request.GET['topic']
+			body = request.GET['body']
+			email = request.GET['email']
 			send_fb(name, topic, body, email)
 
-			request.session['name'] = f",<br>{name}!"
+			request.session['name'] = f"{name}"
 			return response
-	
-	return HttpResponse('Error')
+
+	errorResponse = HttpResponse("-1")
+	errorResponse.status_code = 400
+
+	return errorResponse
