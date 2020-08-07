@@ -35,7 +35,7 @@ def product_detail_view(request, *args, **kwargs):
     queryDict = request.GET
     requestedArticle = int(request.GET['article'])
     requestedObject = Product.objects.get(article=requestedArticle)
-    requestedObject.amount -= getReservation(requestedArticle)
+    # requestedObject.amount -= getReservation(requestedArticle) # TODO: remove and deal with availableAmount on frontend
 
 
 

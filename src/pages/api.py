@@ -38,8 +38,13 @@ import pickle
 
 
 def homepage_view(request, *agrs, **kwargs):
-    if request.get_host() == "http://дачник33.site" or request.get_host() == "http://xn--33-6kcpvmt3f.site":
-        return HttpResponseRedirect('http://dachnik33.site/')
+    # try:
+    #     syncPosts()
+    # except:
+    #     try:
+    #         syncPosts()
+    #     except:
+    #         print("Could not sync posts")
     syncPosts()
     request.session['initialized'] = True
     print("Fuck", request.session['initialized'])
@@ -56,7 +61,7 @@ def homepage_view(request, *agrs, **kwargs):
     for cat in productsRows:
         for pr in productsRows[cat]:
             if not pr.discount == 0:
-                pr_serialized = repr_product_dct(pr)
+                pr_serialized = repr_product_dct(pr, request=request)
                 if pr.discount > betterDisc[0]:
                     betterDisc[0] = pr.discount
                     betterDisc[1] = pr_serialized

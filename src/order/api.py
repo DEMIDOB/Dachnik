@@ -2,6 +2,7 @@ import json
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import OrderForm
 from .models import Order
@@ -14,7 +15,7 @@ from mail.order_mail import *
 
 # Create your views here.
 from pages.templatetags import calcPrice
-from products.gets import getProductsCatrows
+from products.gets import getProductsCatrows, repr_product_dct
 from products.models import Product
 from reserve.sets import unreserve
 
@@ -29,14 +30,14 @@ def make_order_view(request, *args, **kwargs):
 
     totalPrice = 0
     for cpr in cartProducts:
-        repr_cartProducts.append(repr_product_dct(cpr))
+        repr_cartProducts.append(repr_product_dct(cpr, request=request))
         totalPrice += calcPrice.calc_final_price(cpr, thisCart)
 
     myContext = {
         'title': 'Оформление заказа',
         "cartProducts": repr_cartProducts,
         "thisCart": thisCart,
-        "totalPrice": totalPrice,
+        "totalPrice": float(totalPrice),
         "cartID": request.session._session_key,
         "isEmpty": len(repr_cartProducts) == 0
     }
@@ -45,7 +46,9 @@ def make_order_view(request, *args, **kwargs):
 
     return HttpResponse(reponseStr)
 
+@csrf_exempt
 def complete_order(request, *args, **kwargs):
+    print(request.get_host())
     queryDict = request.POST
 
     if not request.method == "POST":

@@ -17,8 +17,9 @@ from django.contrib import admin
 from pages.api import homepage_view, page404_view, favicon_view, order_help_view
 from products.api import products_view, product_detail_view
 from feedback.api import process_feedback_view
-from cart.api import user_cart_view, add_to_cart_view, remove_from_cart
+from cart.api import user_cart_view, add_to_cart_view, remove_from_cart, update_cart
 from order.api import make_order_view, complete_order, thankyou_view, remove_order, rm_o, recieve_order_view, rec_o
+from user.api import myname_api
 from django.urls import path
 
 urlpatterns = [
@@ -39,5 +40,9 @@ urlpatterns = [
     path('favicon.ico/', favicon_view),
     path('recieve_order/', recieve_order_view),
     path('rec_o/', rec_o),
-    path('help/order/', order_help_view)
+    path('help/order/', order_help_view),
+    path('cart/update/', update_cart),
+
+    # USER DATA:
+    path('myname/', myname_api)
 ]

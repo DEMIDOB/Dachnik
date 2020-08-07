@@ -26,7 +26,15 @@ def syncPosts():
 
     print("Updating posts in DB - more than an hour left from the previous update!")
 
-    posts = vk_session.method('wall.get', {'owner_id': 518803197, "type": "text"})['items']
+    try:
+        posts = vk_session.method('wall.get', {'owner_id': 518803197, "type": "text"})['items']
+    except:
+        try:
+            syncPosts()
+            return
+        except Exception as exc:
+            print("Could not sync VK posts due to:", exc)
+            return
 
     for post in posts:
         vk_text = str(post['text'])

@@ -4,6 +4,7 @@ from .models import Cart
 from .get import u_cart
 from products.models import Product
 from reserve.sets import *
+from reserve.get import *
 
 def addToCart(request, productArticle, amount):
 
@@ -14,19 +15,34 @@ def addToCart(request, productArticle, amount):
 
     productArticle = str(productArticle)
 
-    print(productArticle in currentData)
+    # print(productArticle in currentData)
+
+    newAmount = amount
 
     if productArticle in currentData:
-        currentData[productArticle] += amount
-    else:
-        currentData[productArticle] = amount
+        newAmount += currentData[productArticle]
+
+
+
+    try:
+        pr = Product.objects.get(article=productArticle)
+    except Exception as exc:
+        return -1
+
+    print("CCCCC", pr.amount - getReservation(pr.article))
+
+    if amount > pr.amount - getReservation(pr.article):
+        print("oh shit")
+        return -1
+
+    currentData[productArticle] = newAmount
 
     thisCart.json = json.dumps(currentData)
     thisCart.save()
 
     reserve(productArticle, amount)
 
-    return 0
+    return thisCart.json
 
 def removeAmount(request, productArticle, amount):
     try:
@@ -65,6 +81,8 @@ def removeFromCart(request, article):
     currentData.pop(str(article))
     thisCart.json = json.dumps(currentData)
     thisCart.save()
+
+    return thisCart.json
 
 def clearCart(request):
     thisCart = u_cart(request)

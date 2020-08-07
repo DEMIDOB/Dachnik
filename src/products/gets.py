@@ -5,8 +5,9 @@ from .models import Product
 from decimal import Decimal
 from reserve.get import *
 from pages.templatetags.calcPrice import calc_final_price, calc_price
+from reserve.get import *
 
-def getAvailableProducts():
+def __getAvailableProducts():
     allProducts = Product.objects.all()
     avProducts = []
     for pr in allProducts:
@@ -23,7 +24,7 @@ def getAvailableProducts():
 
 
 def getProductsRow():
-    avProducts = getAvailableProducts()
+    avProducts = __getAvailableProducts()
 
     productRows = []
     stillMoreProducts = True
@@ -42,7 +43,7 @@ def getProductsRow():
 
 
 def getProductsCatrows():
-    avProducts = getAvailableProducts()
+    avProducts = __getAvailableProducts()
     cats = []
     prows = {}
 
@@ -82,18 +83,36 @@ def formReprData(cartData, telegramMarkdown = True):
 
     return productsOrder
 
-def repr_product_dct(product):
+def repr_product_dct(product, **kwargs):
+    '''
+    Only
+    '''
+    from cart.get import u_cart
+    try:
+        request = kwargs['request']
+        cart = json.loads(u_cart(request).json)
+        print(cart)
+        if product.article in cart:
+            cartPrice = calc_final_price(product, cart)
+        else:
+            cartPrice = -1
+    except Exception as exc:
+        print("Could not calculate the cartPrice", exc)
+        cartPrice = -1
+
     data = {
         'title': str(product.title),
         'description': str(product.description),
         'category': str(product.category),
         'price': str(product.price),
         'finalPrice': str(calc_price(product)),
+        "cartPrice": str(cartPrice),
         'discount': str(product.discount),
         'producer': str(product.producer),
         'icon': str(product.icon),
         'article': str(product.article),
-        'amount': product.amount,
+        'totalAmount': product.amount,
+        'availableAmount': product.amount - getReservation(product.article),
         'isAvailable': product.isAvailable
     }
     return data
