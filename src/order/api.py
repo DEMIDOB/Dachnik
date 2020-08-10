@@ -83,7 +83,7 @@ def complete_order(request, *args, **kwargs):
 
     OrderObject.save()
 
-    request.session['name'] = f",<br>{name}!"
+    request.session['name'] = f"{name}"
 
     print(f"{request.get_host()}/remove_order?oid={OrderObject.id}")
 

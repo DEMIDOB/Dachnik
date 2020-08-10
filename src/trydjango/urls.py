@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from pages.api import homepage_view, page404_view, favicon_view, order_help_view
-from products.api import products_view, product_detail_view
+from products.api import products_view, product_detail_view, categories_view
 from feedback.api import process_feedback_view
 from cart.api import user_cart_view, add_to_cart_view, remove_from_cart, update_cart
 from order.api import make_order_view, complete_order, thankyou_view, remove_order, rm_o, recieve_order_view, rec_o
@@ -42,6 +42,7 @@ urlpatterns = [
     path('rec_o/', rec_o),
     path('help/order/', order_help_view),
     path('cart/update/', update_cart),
+    path('cats/', categories_view),
 
     # USER DATA:
     path('myname/', myname_api)

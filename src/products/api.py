@@ -15,14 +15,27 @@ from reserve.get import *
 
 # Create your views here.
 
-def products_view(request, *args, **kwargs):
+def categories_view(request):
+    productRows, categories = repr_producstCatrows()
+    responseStr = json.dumps(categories, ensure_ascii=False)
+    response = HttpResponse(responseStr)
+    return response
 
-    productsRows, categories = repr_producstCatrows()
+def products_view(request, *args, **kwargs):
+    queryDict = request.GET
+
+    filters = {}
+
+    if 'cat' in queryDict:
+        filters['category'] = queryDict['cat'].lower()
+
+    productsRows, categories = repr_producstCatrows(filters=filters)
 
     myContext = {
         "title": "Товары",
         "categories": categories,
-        "products": productsRows
+        "products": productsRows,
+        "ok": len(productsRows) > 0
     }
 
     responseData = json.dumps(myContext, ensure_ascii=False)

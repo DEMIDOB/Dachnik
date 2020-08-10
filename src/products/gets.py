@@ -7,7 +7,7 @@ from reserve.get import *
 from pages.templatetags.calcPrice import calc_final_price, calc_price
 from reserve.get import *
 
-def __getAvailableProducts():
+def __getAvailableProducts(**kwargs):
     allProducts = Product.objects.all()
     avProducts = []
     for pr in allProducts:
@@ -23,32 +23,42 @@ def __getAvailableProducts():
     return avProducts
 
 
-def getProductsRow():
-    avProducts = __getAvailableProducts()
+# def getProductsRow():
+#     avProducts = __getAvailableProducts()
+#
+#     productRows = []
+#     stillMoreProducts = True
+#     for i in range(0, len(avProducts), 3):
+#         print(i)
+#         if not stillMoreProducts:
+#             break
+#         productRows.append([])
+#         for j in range(3):
+#             try:
+#                 productRows[i // 3].append(avProducts[i + j])
+#             except IndexError:
+#                 stillMoreProducts = False
+#                 break
+#     return productRows, avProducts
 
-    productRows = []
-    stillMoreProducts = True
-    for i in range(0, len(avProducts), 3):
-        print(i)
-        if not stillMoreProducts:
-            break
-        productRows.append([])
-        for j in range(3):
-            try:
-                productRows[i // 3].append(avProducts[i + j])
-            except IndexError:
-                stillMoreProducts = False
-                break
-    return productRows, avProducts
 
-
-def getProductsCatrows():
+def getProductsCatrows(filters={}):
     avProducts = __getAvailableProducts()
     cats = []
     prows = {}
 
+    filterByCat = False
+
+    if 'category' in filters:
+        categoryFilter = filters['category']
+        filterByCat = True
+
     for product in avProducts:
         category = product.category.lower()
+
+        if filterByCat and not category == categoryFilter:
+            continue
+
         if not category in prows:
             prows[category] = []
             cats.append(category)
@@ -117,8 +127,8 @@ def repr_product_dct(product, **kwargs):
     }
     return data
 
-def repr_producstCatrows():
-    prows, categories = getProductsCatrows()
+def repr_producstCatrows(filters={}):
+    prows, categories = getProductsCatrows(filters=filters)
 
     data = {}
 
