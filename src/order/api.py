@@ -77,13 +77,14 @@ def complete_order(request, *args, **kwargs):
         cartJSON = thisCart.json
         cartData = json.loads(cartJSON)
         if len(cartData) < 1:
-            return HttpResponse("Вы не можете оформить один заказ дважды!")
+            return HttpResponse(f"Вы пытаетесь оформить пустой заказ. Так нельзя :)")
 
         name  = queryDict['name']
         phone = queryDict['phone']
         email = queryDict['email']
-    except:
-        return HttpResponse("Not enough request data!")
+    except Exception as exc:
+        print(exc)
+        return HttpResponse(f"Not enough request data!\n\n{exc}")
 
     try:
         comment = queryDict['comment']
