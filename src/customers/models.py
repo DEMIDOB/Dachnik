@@ -4,7 +4,7 @@ from django.db import models
 
 # Create your models here.
 class Customer(models.Model):
-    name = models.CharField(max_length=50, default="")
+    name = models.CharField(max_length=50, default="-1")
 
     def getCart(self):
         from cart.get import cartForUserWithID
