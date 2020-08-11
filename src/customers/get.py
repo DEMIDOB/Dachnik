@@ -14,6 +14,10 @@ def getCustomerForRequest(request: HttpRequest):
         }
 
     existed = True
+
+    if 'uid' in request.COOKIES:
+        queryDict['uid'] = request.COOKIES['uid']
+
     if not 'uid' in queryDict:
         thisCustomer = Customer()
         existed = False

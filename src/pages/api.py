@@ -45,7 +45,7 @@ def homepage_view(request, *agrs, **kwargs):
     #         syncPosts()
     #     except:
     #         print("Could not sync posts")
-    syncPosts()
+    # syncPosts()
     # thisCart = u_cart(request)
     userData = getCustomerForRequest(request)
     if not userData["ok"]:

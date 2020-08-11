@@ -1,5 +1,7 @@
 import json
 
+from django.http import HttpResponse
+
 from .models import Cart
 from customers.get import getCustomerForRequest
 from products.models import Product
@@ -51,7 +53,15 @@ def addToCart(request, productArticle, amount):
 
 def removeAmount(request, productArticle, amount):
     try:
-        thisCart = u_cart(request)
+        userData = getCustomerForRequest(request)
+        if not userData["ok"]:
+            return HttpResponse(json.dumps({
+                "ok": False,
+                "msg": userData["msg"]
+            }))
+        thisCustomer = userData["user"]
+        thisCart = thisCustomer.getCart()
+
         if thisCart == -1:
             raise("There is no cart belonging to this user or the user is not registered!")
 
@@ -78,7 +88,15 @@ def removeAmount(request, productArticle, amount):
         return -1
 
 def removeFromCart(request, article):
-    thisCart = u_cart(request)
+    userData = getCustomerForRequest(request)
+    if not userData["ok"]:
+        return HttpResponse(json.dumps({
+            "ok": False,
+            "msg": userData["msg"]
+        }))
+    thisCustomer = userData["user"]
+    thisCart = thisCustomer.getCart()
+
     currentData = json.loads(thisCart.json)
 
     unreserve(article, currentData[str(article)])
@@ -90,6 +108,14 @@ def removeFromCart(request, article):
     return thisCart.json
 
 def clearCart(request):
-    thisCart = u_cart(request)
+    userData = getCustomerForRequest(request)
+    if not userData["ok"]:
+        return HttpResponse(json.dumps({
+            "ok": False,
+            "msg": userData["msg"]
+        }))
+    thisCustomer = userData["user"]
+    thisCart = thisCustomer.getCart()
+
     thisCart.json = "{}"
     thisCart.save()

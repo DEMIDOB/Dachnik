@@ -103,8 +103,9 @@ def repr_product_dct(product, **kwargs):
 
         userData = getCustomerForRequest(request)
         thisCustomer = userData["user"]
+        thisCart = thisCustomer.getCart()
 
-        cart = thisCustomer.getCart()
+        cart = json.loads(thisCart.json)
         print(cart)
         if product.article in cart:
             cartPrice = calc_final_price(product, cart)
