@@ -1,8 +1,11 @@
+import json
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import *
 from bot.fb import send_fb
+from customers.get import getCustomerForRequest
 
 import pickle
 
@@ -10,8 +13,15 @@ import pickle
 @csrf_exempt
 def process_feedback_view(request, *args, **kwargs):
 	if request.method == "GET":
-		form = FeedbackForm(request.GET)
-		print(request.GET)
+
+		userData = getCustomerForRequest(request)
+		if not userData["ok"]:
+			return HttpResponse(json.dumps({
+				"ok": False,
+				"msg": userData["msg"]
+			}))
+		thisCustomer = userData["user"]
+
 		if True:
 			response = HttpResponse("0")
 
@@ -21,7 +31,8 @@ def process_feedback_view(request, *args, **kwargs):
 			email = request.GET['email']
 			send_fb(name, topic, body, email)
 
-			request.session['name'] = f"{name}"
+			thisCustomer.name = f"{name}"
+			thisCustomer.save()
 			return response
 
 	errorResponse = HttpResponse("-1")

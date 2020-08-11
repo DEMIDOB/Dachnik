@@ -97,10 +97,14 @@ def repr_product_dct(product, **kwargs):
     '''
     Only
     '''
-    from cart.get import u_cart
+    from customers.get import getCustomerForRequest
     try:
         request = kwargs['request']
-        cart = json.loads(u_cart(request).json)
+
+        userData = getCustomerForRequest(request)
+        thisCustomer = userData["user"]
+
+        cart = thisCustomer.getCart()
         print(cart)
         if product.article in cart:
             cartPrice = calc_final_price(product, cart)

@@ -9,7 +9,7 @@ from products.models import Product
 
 from products.gets import *
 from feedback.forms import FeedbackForm
-from cart.get import u_cart
+from customers.get import *
 from blog.syncPosts import syncPosts
 
 import pickle
@@ -46,10 +46,14 @@ def homepage_view(request, *agrs, **kwargs):
     #     except:
     #         print("Could not sync posts")
     syncPosts()
-    request.session['initialized'] = True
-    print("Fuck", request.session['initialized'])
-    request.COOKIES['asdasd'] = 'asdasd'
     # thisCart = u_cart(request)
+    userData = getCustomerForRequest(request)
+    if not userData["ok"]:
+        return HttpResponse(json.dumps({
+            "ok": False,
+            "msg": userData["msg"]
+        }))
+    thisCustomer = userData["user"]
 
     productsRows, categories = getProductsCatrows()
 
@@ -73,8 +77,6 @@ def homepage_view(request, *agrs, **kwargs):
 
     # Removing object with the best discount from the 'withDiscount' list:
     withDiscount.remove(withDiscount[betterDisc[2]])
-    
-    name = request.session.get('name', "-1")
 
     myContext = {
         "title": "Главная",
@@ -82,12 +84,11 @@ def homepage_view(request, *agrs, **kwargs):
         "catsWithDisct": catsWithDisct,
         "discProducts": withDiscount,
         "betterDisc": betterDisc[1], # it is already serialized
-        "name": name
+        "user": thisCustomer.getRepr()
     }
 
     response_str = json.dumps(myContext, ensure_ascii=False)
     response = HttpResponse(response_str)
-    response.set_cookie('asd', 'asdasd')
     response["Access-Control-Allow-Origin"] = "*"
 
     return response

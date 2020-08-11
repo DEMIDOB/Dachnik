@@ -3,20 +3,20 @@ import json
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
-from .models import Cart
-from .get import u_cart
+
 from .sets import addToCart, removeFromCart, removeAmount
 
 from pages.templatetags import calcPrice
 from products.models import Product
 from products.gets import *
+from customers.get import getCustomerForRequest
 
 # Create your views here.
 
 requiredMethod = "GET" # TODO: Change to "POST" after debugging
 
 def add_to_cart_view(request, *args, **kwargs):
-    
+
 
     if requiredMethod == "GET":
         queryDict = request.GET
@@ -43,11 +43,19 @@ def add_to_cart_view(request, *args, **kwargs):
         return HttpResponse('-1')
 
     return HttpResponse(updatedCartJson)
-    
+
 
 def user_cart_view(request, *args, **kwargs):
-    print(request.session._session_key)
-    thisCart = json.loads(u_cart(request).json)
+    userData = getCustomerForRequest(request)
+    if not userData["ok"]:
+        return HttpResponse(json.dumps({
+            "ok": False,
+            "msg": userData["msg"]
+        }))
+    thisCustomer = userData["user"]
+    thisCartObj = thisCustomer.getCart()
+    thisCart = json.loads(thisCartObj.json)
+
     productsRows, categories = getProductsCatrows()
     cartProducts = Product.objects.filter(isAvailable=True, article__in=thisCart)
 
@@ -59,20 +67,17 @@ def user_cart_view(request, *args, **kwargs):
         totalPrice += calcPrice.calc_final_price(cpr, thisCart)
 
     print(thisCart, repr_cartProducts)
-    
+
     myContext = {
         "title": "Корзина",
         "cartProducts": repr_cartProducts,
         "thisCart": thisCart,
         "totalPrice": float(totalPrice),
-        "isEmpty": len(repr_cartProducts) == 0
+        "isEmpty": len(repr_cartProducts) == 0,
+        "user": thisCustomer.getRepr()
     }
-    try:
-        responseStr = json.dumps(myContext, ensure_ascii=False)
-    except Exception as e:
-        print(e)
-        responseStr = "-1"
-    print(responseStr)
+
+    responseStr = json.dumps(myContext, ensure_ascii=False)
 
     return HttpResponse(responseStr)
 

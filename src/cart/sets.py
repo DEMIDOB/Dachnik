@@ -1,16 +1,21 @@
 import json
 
 from .models import Cart
-from .get import u_cart
+from customers.get import getCustomerForRequest
 from products.models import Product
 from reserve.sets import *
 from reserve.get import *
 
 def addToCart(request, productArticle, amount):
+    userData = getCustomerForRequest(request)
+    if not userData["ok"]:
+        return HttpResponse(json.dumps({
+            "ok": False,
+            "msg": userData["msg"]
+        }))
+    thisCustomer = userData["user"]
+    thisCart = thisCustomer.getCart()
 
-    thisCart = u_cart(request)
-    if thisCart == -1:
-        return -1
     currentData = json.loads(thisCart.json)
 
     productArticle = str(productArticle)

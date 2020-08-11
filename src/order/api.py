@@ -7,11 +7,12 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import OrderForm
 from .models import Order
 
-from cart.get import u_cart
 from cart.sets import clearCart
 
 from bot.order import sendOrderNotification, sendCancelledOrderNotification, sendRecievedOrderNotification
 from mail.order_mail import *
+
+from customers.get import getCustomerForRequest
 
 # Create your views here.
 from pages.templatetags import calcPrice
@@ -21,25 +22,34 @@ from reserve.sets import unreserve
 
 
 def make_order_view(request, *args, **kwargs):
-    print(request.session._session_key)
-    thisCart = json.loads(u_cart(request).json)
-    productsRows, categories = getProductsCatrows()
-    cartProducts = Product.objects.filter(isAvailable=True, article__in=thisCart)
+    userData = getCustomerForRequest(request)
+    if not userData["ok"]:
+        return HttpResponse(json.dumps({
+            "ok": False,
+            "msg": userData["msg"]
+        }))
+    thisCustomer = userData["user"]
+    thisCart = thisCustomer.getCart()
+    thisCartJSON = json.loads(thisCart.json)
+
+    # productsRows, categories = getProductsCatrows()
+    cartProducts = Product.objects.filter(isAvailable=True, article__in=thisCartJSON)
 
     repr_cartProducts = []
 
     totalPrice = 0
     for cpr in cartProducts:
         repr_cartProducts.append(repr_product_dct(cpr, request=request))
-        totalPrice += calcPrice.calc_final_price(cpr, thisCart)
+        totalPrice += calcPrice.calc_final_price(cpr, thisCartJSON)
 
     myContext = {
         'title': 'Оформление заказа',
         "cartProducts": repr_cartProducts,
-        "thisCart": thisCart,
+        "thisCart": thisCartJSON,
         "totalPrice": float(totalPrice),
         "cartID": request.session._session_key,
-        "isEmpty": len(repr_cartProducts) == 0
+        "isEmpty": len(repr_cartProducts) == 0,
+        "user": thisCustomer.getRepr()
     }
 
     reponseStr = json.dumps(myContext, ensure_ascii=False)
@@ -55,7 +65,16 @@ def complete_order(request, *args, **kwargs):
         return HttpResponse(f"Wrong request method '{request.method}'! Expected 'POST'")
 
     try:
-        cartJSON = u_cart(request).json
+        userData = getCustomerForRequest(request)
+        if not userData["ok"]:
+            return HttpResponse(json.dumps({
+                "ok": False,
+                "msg": userData["msg"]
+            }))
+        thisCustomer = userData["user"]
+        thisCart = thisCustomer.getCart()
+
+        cartJSON = thisCart.json
         cartData = json.loads(cartJSON)
         if len(cartData) < 1:
             return HttpResponse("Вы не можете оформить один заказ дважды!")
@@ -91,7 +110,13 @@ def complete_order(request, *args, **kwargs):
     sendThanksForOrderEmail(OrderObject)
 
     # return HttpResponseRedirect(f'/thankyou/?oid={OrderObject.id}')
-    return HttpResponse("0")
+    responseData = {
+        "ok": True,
+        "user": thisCustomer.getRepr()
+    }
+    responseStr = json.dumps(responseData, ensure_ascii=False)
+
+    return HttpResponse(responseStr)
 
 def remove_order(request, *args, **kwargs):
     queryDict = request.GET

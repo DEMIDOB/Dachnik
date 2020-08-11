@@ -19,7 +19,7 @@ from products.api import products_view, product_detail_view, categories_view
 from feedback.api import process_feedback_view
 from cart.api import user_cart_view, add_to_cart_view, remove_from_cart, update_cart
 from order.api import make_order_view, complete_order, thankyou_view, remove_order, rm_o, recieve_order_view, rec_o
-from user.api import myname_api
+from customers.api import myname_api
 from django.urls import path
 
 urlpatterns = [
