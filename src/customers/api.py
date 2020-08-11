@@ -15,7 +15,7 @@ def myname_api(request):
     thisCustomer = userData["user"]
 
     respData = {
-        "name": thisCustomer.name if not thisCustomer.name == "" else "-1",
+        "user": thisCustomer.getRepr(),
         "exists": not thisCustomer.name == ""
     }
 
